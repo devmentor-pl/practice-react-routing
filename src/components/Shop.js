@@ -1,12 +1,14 @@
-import React from 'react';
-import Product from './Product';
+import React from "react";
+import Product from "./Product";
 
-const Shop = (products) => {
-    return (
-        <section>
-            { products.map(p => <Product {...p} />)}
-        </section>
-    );
-}
+const Shop = ({ products }) => {
+  return (
+    <section>
+      {products.map(p => (
+        <Product key={p.id} {...p} link={`/task02/product-${p.id}`} />
+      ))}
+    </section>
+  );
+};
 
 export default Shop;
