@@ -1,5 +1,10 @@
 import React from "react";
-import { HashRouter as Router, Route, NavLink } from "react-router-dom";
+import {
+  HashRouter as Router,
+  Route,
+  NavLink,
+  Redirect,
+} from "react-router-dom";
 
 import Home from "../src/components/Home";
 import Contact from "../src/components/Contact";
@@ -21,6 +26,7 @@ const Task01 = () => {
       {nav}
       <Route path="/task01/home" component={Home} />
       <Route path="/task01/contact" component={Contact} />
+      <Redirect to="/task01/home" />
     </Router>
   );
 };
