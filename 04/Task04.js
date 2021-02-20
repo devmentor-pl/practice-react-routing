@@ -20,18 +20,17 @@ const sortingFuncs = {
     });}
 }
 
-const options = [
-    {path: mainPath, innerText: '-'},
-    {path: 'sortByPriceAsc', innerText: 'price ascending'},
-    {path: 'sortByPriceDesc', innerText: 'price descending'},
-    {path: 'sortByAlphabetAZ', innerText: 'alphabetically A-Z'},
-    {path: 'sortByAlphabetZA', innerText: 'alphabetically Z-A'},
-    {path: 'sortById', innerText: 'product ID'},
-]
-
 const Task04 = () => {
     const mainPath = `/task04`;
     const history = useHistory();
+    const options = [
+		{ path: mainPath, innerText: '-' },
+		{ path: 'sortByPriceAsc', innerText: 'price ascending' },
+		{ path: 'sortByPriceDesc', innerText: 'price descending' },
+		{ path: 'sortByAlphabetAZ', innerText: 'alphabetically A-Z' },
+		{ path: 'sortByAlphabetZA', innerText: 'alphabetically Z-A' },
+		{ path: 'sortById', innerText: 'product ID' },
+	];
 
     function renderOptions() {
         return options.map(({path, innerText}) => <option key={path} value={path}>{innerText}</option>)
@@ -43,6 +42,7 @@ const Task04 = () => {
                 return <Route exact key={path} path={path}><Shop products={products}/></Route>;
             } else {
                 const innerPath = `${mainPath}/${path}`;
+                console.log(innerPath);
                 return <Route key={path} path={innerPath}><Shop products={sortingFuncs[path]()}/></Route>;
             }
         })
@@ -53,6 +53,7 @@ const Task04 = () => {
             history.push(mainPath)
         } else {
             const path = `${mainPath}/${value}`;
+            console.log(path);
             history.push(path)
         }
     }
