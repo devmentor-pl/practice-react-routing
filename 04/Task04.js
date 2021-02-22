@@ -4,16 +4,16 @@ import Shop from '../src/components/Shop'
 import products from './../src/products.json';
 
 const sortingFuncs = {
-    sortByPriceAsc: () => {return products.sort((a, b) => a.price - b.price)},
-    sortByPriceDesc: () => {return products.sort((a, b) => b.price - a.price)},
-    sortById: () => {    return products.sort((a, b) => a.id - b.id)
+    sortByPriceAsc: () => {return [...products].sort((a, b) => a.price - b.price)},
+    sortByPriceDesc: () => {return [...products].sort((a, b) => b.price - a.price)},
+    sortById: () => {    return [...products].sort((a, b) => a.id - b.id)
     },
-    sortByAlphabetAZ: () => {return products.sort((a, b) => {
+    sortByAlphabetAZ: () => {return [...products].sort((a, b) => {
         const aName = a.name.toLowerCase();
         const bName = b.name.toLowerCase();
         return (aName < bName) ? -1 : (aName > bName) ? 1 : 0;
     });},
-    sortByAlphabetZA: () => { return products.sort((a, b) => {
+    sortByAlphabetZA: () => { return [...products].sort((a, b) => {
         const aName = a.name.toLowerCase();
         const bName = b.name.toLowerCase();
         return (aName < bName) ? 1 : (aName > bName) ? -1 : 0;
@@ -42,7 +42,6 @@ const Task04 = () => {
                 return <Route exact key={path} path={path}><Shop products={products}/></Route>;
             } else {
                 const innerPath = `${mainPath}/${path}`;
-                console.log(innerPath);
                 return <Route key={path} path={innerPath}><Shop products={sortingFuncs[path]()}/></Route>;
             }
         })
@@ -53,7 +52,6 @@ const Task04 = () => {
             history.push(mainPath)
         } else {
             const path = `${mainPath}/${value}`;
-            console.log(path);
             history.push(path)
         }
     }
