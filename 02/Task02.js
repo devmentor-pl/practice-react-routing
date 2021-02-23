@@ -10,10 +10,10 @@ const Task02 = () => {
     })
 
     return (
-        <Router>
+        <>
             <h1>Task02</h1>
             {routs}
-        </Router>
+        </>
     );
 }
 

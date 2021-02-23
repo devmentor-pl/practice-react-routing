@@ -64,9 +64,8 @@ const Task04 = () => {
                     {renderOptions()}
                 </select>
             </label>
-            <Router>
-                {renderRoutes()}
-            </Router>
+            {renderRoutes()}
+
         </>
     );
 }

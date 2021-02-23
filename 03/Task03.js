@@ -54,7 +54,7 @@ const Task03 = () => {
 	}
 
 	return (
-		<Router>
+		<>
 			<h1>Task03</h1>
 			<nav>
 				<ul>{createNavLinks()}</ul>
@@ -64,7 +64,7 @@ const Task03 = () => {
 			</Route>
 			{createRoutesWithCategories()}
 			<Link to="/task03">{'<<< ' + 'Go to main page'}</Link>
-		</Router>
+		</>
 	);
 }
 

@@ -95,12 +95,10 @@ const Task05 = () => {
             </div>
             <button>Search</button>
         </form>
-        <Router>
-            <Route exact path='/task05'><Shop products={products}/></Route>
-            <Route path={`/task05/price-:min-:max`}><ShopSorted/></Route>
-            <Route path={`/task05/:phrase`}><ShopSorted/></Route>
-            <Route path={`/task05/:phrase-price-:min-:max`}><ShopSorted/></Route>
-        </Router>
+        <Route exact path='/task05'><Shop products={products}/></Route>
+        <Route path={`/task05/price-:min-:max`}><ShopSorted/></Route>
+        <Route path={`/task05/:phrase`}><ShopSorted/></Route>
+        <Route path={`/task05/:phrase-price-:min-:max`}><ShopSorted/></Route>
     </>
     );
 
