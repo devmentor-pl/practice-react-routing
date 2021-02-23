@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, HashRouter as Router} from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import products from '../src/products.json';
 import Product from '../src/components/Product'
 

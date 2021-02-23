@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Route, useParams, useHistory, HashRouter as Router } from 'react-router-dom';
+import { Route, useParams, useHistory } from 'react-router-dom';
 import Shop from '../src/components/Shop';
 import products from './../src/products.json';
 

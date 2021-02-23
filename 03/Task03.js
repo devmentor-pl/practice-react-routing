@@ -1,6 +1,6 @@
 import React from 'react';
 import { v4 as uuid } from 'uuid';
-import { Route, NavLink, Link, HashRouter as Router } from 'react-router-dom';
+import { Route, NavLink, Link} from 'react-router-dom';
 import Shop from '../src/components/Shop'
 import products from './../src/products.json';
 

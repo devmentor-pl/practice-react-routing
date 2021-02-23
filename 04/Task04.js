@@ -1,5 +1,5 @@
 import React from 'react';
-import {useHistory, Route, HashRouter as Router} from 'react-router-dom';
+import {useHistory, Route} from 'react-router-dom';
 import Shop from '../src/components/Shop'
 import products from './../src/products.json';
 
