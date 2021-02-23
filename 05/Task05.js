@@ -1,59 +1,42 @@
 import React, {useState} from 'react';
-import { Route, useParams, useHistory } from 'react-router-dom';
+import { Route, useHistory } from 'react-router-dom';
 import Shop from '../src/components/Shop';
 import products from './../src/products.json';
 
-const sortingFuncs = {
-    sortByPriceRange: sortByPriceRange,
-    sortByPhrase: sortByPhrase,
-    sortByAllParams: sortByAllParams
-}
-
-function sortByPriceRange(min, max) {
+function sortByPriceRange(min=0, max=0) {
     const minPrice = parseInt(min);
-        const maxPrice = parseInt(max);
-        const sorted = products.filter(({price}) => price >= minPrice && price <= maxPrice)
-        return sorted
-}
-function sortByPhrase(phrase) {
-    const word = phrase.toLowerCase();
-    const sorted = products.filter(({name}) => name.toLowerCase().includes(word))
+    const maxPrice = parseInt(max);
+    const sorted = products.filter(({price}) => {
+        if(min && max) {
+            return price >= minPrice && price <= maxPrice
+        } else if(min && !max) {
+            return price >= minPrice
+        } else if(!min && max) {
+            return price <= maxPrice
+        } else {return true}
+    })
     return sorted
 }
-function sortByAllParams(min, max, phrase) {
-    const sortedByPrice = sortByPriceRange(min, max);
-    const sortedByAllParams = sortedByPrice.filter(({name}) => name.toLowerCase().includes(phrase.toLowerCase()))
-    return sortedByAllParams
+function sortByPhrase(products, phrase) {
+    console.log(phrase)
+    const word = phrase.toLowerCase();
+    const sorted = products.filter(({name}) => name.toLowerCase().includes(word))
+    console.log(sorted)
+    console.log(products)
+    return phrase ? sorted : products
 }
 
-function pickSortFunc() {
-    const {min, max, phrase} = useParams();
-    if(min && max && !phrase) {
-        return {
-            func: 'sortByPriceRange',
-            params: [min, max]
-        }
-    } else if(!(min && max) && phrase) {
-        return {
-            func: 'sortByPhrase',
-            params: [phrase]
-        }
-    } else if(min && max && phrase) {
-        return {
-            func: 'sortByAllParams',
-            params: [min, max, phrase]
-        }
-    } 
-}
-
-const ShopSorted = () => {
-    const {func, params} = pickSortFunc();
-    return <Shop products={sortingFuncs[func](...params)}/>
+const ShopSorted = ({match}) => {
+    const {minPrice, maxPrice, phrase} = match.params;
+    const priceSorted = sortByPriceRange(minPrice, maxPrice);
+    const sorted = sortByPhrase(priceSorted, phrase)
+    console.log(sorted)
+    return <Shop products={sorted}/>
 }
 
 const initState = { 
-    minPrice: '',
-    maxPrice: '',
+    minPrice: 0,
+    maxPrice: 0,
     phrase: ''
 }
 
@@ -68,17 +51,7 @@ const Task05 = () => {
     function handleSubmit(e) {
         e.preventDefault();
         const {minPrice, maxPrice, phrase} = values;
-        if(minPrice > maxPrice) {
-            alert('Najpierw wpisz cenę minimalną, potem maksymalną.')
-        } else if (minPrice && maxPrice && !phrase) {
-            history.push(`/task05/price-${minPrice}-${maxPrice}`)
-        } else if(!(minPrice && maxPrice) && phrase) {
-            history.push(`/task05/${phrase}`)
-        }  else if(minPrice && maxPrice && phrase) {
-            history.push(`/task05/${phrase}-price-${minPrice}-${maxPrice}`)
-        } else if(!minPrice && !maxPrice && !phrase) {
-            alert('Proszę wprowadzić parametry filtrowania.')
-        }
+        history.push(`/task05/${minPrice},${maxPrice}-${phrase}`)
     }
 
     return (
@@ -96,9 +69,7 @@ const Task05 = () => {
             <button>Search</button>
         </form>
         <Route exact path='/task05'><Shop products={products}/></Route>
-        <Route path={`/task05/price-:min-:max`}><ShopSorted/></Route>
-        <Route path={`/task05/:phrase`}><ShopSorted/></Route>
-        <Route path={`/task05/:phrase-price-:min-:max`}><ShopSorted/></Route>
+        <Route path={`/task05/:minPrice,:maxPrice-:phrase`} component={ShopSorted} />
     </>
     );
 
