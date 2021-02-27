@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 const Task01 = () => {
 
     return (
-        <Router>
+        <>
         <h1>Task01</h1>
         <ul>
              <li><Link to="/task01/home">Home</Link></li>
@@ -22,7 +22,7 @@ const Task01 = () => {
                 path="/task01/contact"
                 component={Contact} 
               />
-        </Router>
+        </>
     );
 }
 
