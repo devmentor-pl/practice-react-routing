@@ -2,13 +2,13 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import Product from '../src/components/Product';
 import products from '../src/products.json'
-import { HashRouter as Router, Switch, Route } from "react-router-dom";
+import {Route } from "react-router-dom";
 
 const Task02 = () => {
 
 
   const showProduct = () => {
-    /*czemu tu filter nie działa ? */
+
     const { id } = useParams()
     const product = products.find(
         product => product.id === parseInt(id)
