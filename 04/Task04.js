@@ -1,18 +1,18 @@
+
 import React from "react";
 import products from '../src/products.json'
 import { useHistory } from 'react-router-dom';
-import Product from '../src/components/Product'
 import Shop from '../src/components/Shop'
-import {Route } from "react-router-dom";
+import { Route } from 'react-router-dom';
 
 const Task04 = () => {
     const history = useHistory();
 
-
+ 
     const options = [
-           { path: "/task04/", text: "--choose--"},
-           { path: "price-desc", text: "descending price"},
-           { path: "price-asc", text: "ascending prices"},
+           { path: "/", text: "--choose--"},
+           { path: "/price-desc", text: "descending price"},
+           { path: "/price-asc", text: "ascending prices"},
     ];
 
 
@@ -20,45 +20,29 @@ const Task04 = () => {
       history.push( event.target.value );
       }
 
+
       const renderSortedProducts = () => {
     
-       return options.map(({path}) => {
+        return options.map(({path}) => {
+        if(path == "/") {
 
-        if(path === "/task04/") {
-            return <Shop products={products}/>
+           return  <Shop products={products} />
+             
        
-        }else if(path === "price-desc") {
-            sortingDescening()
-        }else if(path === "price-asc") {            
-            sortingAscending()
+        } else if(path == "/price-desc") {
+            <Shop products={sortByPriceAsc} />
+        } else if(path == "/price-asc") {            
+            <Shop products={sortByPriceDesc} />
         }
+
        })
       }
 
-      const sortingDescening = () => {
-          const sortedASC = products.sort(function(a,b) {
-            a.price - b.price
-
-      })
-     console.log(sortedASC.reverse())
-     console.log(sortedASC)
-      return sortedASC;
-      
-      }
-      const sortingAscending = () => {
-        const sortedASC = products.sort(function(a,b) {
-            b.price - a.price
-      })
-      
-     console.log(sortedASC)
-     console.log(sortedASC)
-      return sortedASC;
-      
-      }
+       const sortByPriceAsc = products.sort((a,b) => a.price - b.price )
+       console.log(sortByPriceAsc)
+       const sortByPriceDesc = products.sort((a,b) => b.price - a.price )
+       console.log(sortByPriceDesc)
  
-
-
-
 
 
     return (
@@ -69,11 +53,14 @@ const Task04 = () => {
              onChange={handleChange}
             >
             {options.map(({path, text}) => (
-                <option key={path} value={`/task04/${path}`}>
+                <option key={path} value={`/task04${path}`}>
                 {text}
                 </option>
             ))}
             </select>
+            {/* <Route exact path='/'>
+                <Shop products={products} />
+            </Route> */}
 
           {renderSortedProducts()}
    

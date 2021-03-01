@@ -18,9 +18,10 @@ const Task03 = () => {
         product.id === parseInt(id)
         if (category.text === "All") {
             return product;
-        } else{
-            return product.category === product.category.name
+        } else {
+            return product.category.toLowerCase() === category.text.toLowerCase()
         }
+
     })
         
         return (
