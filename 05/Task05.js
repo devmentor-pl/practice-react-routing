@@ -3,6 +3,7 @@ import products from '../src/products.json'
 import { Route } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import Shop from '../src/components/Shop'
+import Product from '../src/components/Product';
 
 
 const Task05 = () => {
@@ -11,21 +12,27 @@ const Task05 = () => {
 
     const sortedProducts = ({ match }) => {
       const { minPrice, maxPrice, searchTerm } = match.params;
-      const sortedByPrice = sortByPrice(minPrice, maxPrice)
-      return <Shop products={sortedByPrice}/>
-      
+      sortByPrice(minPrice, maxPrice)
+      sortBySearchTerm(searchTerm)
+      return null;
     };
 
-    const sortByPrice = (minPrice, maxPrice) => {
-     return products.filter(({price}) => {
-    
-       console.log(minPrice, maxPrice)
-       const Price = price.price >= minPrice && price.price <= maxPrice
-       console.log(Price)
 
-      });
-    }
+      const sortBySearchTerm = searchTerm => {
+        const searchedWord = searchTerm.toLowerCase();
+        const sortedProduct = products.filter(({name}) => name.toLowerCase().includes(searchedWord))
+        console.log(sortedProduct)
+        
+      }
 
+      const sortByPrice = (minPrice, maxPrice) => {
+        const filtredProducts = products.filter(function(product){
+        return product.price >= minPrice && product.price <= maxPrice
+        });
+        console.log(filtredProducts)
+      }
+
+  
       const [values, setValues] = useState({
       minPrice: '',
       maxPrice: '',
@@ -44,7 +51,7 @@ const Task05 = () => {
       const {minPice, maxPice, searchTerm} = values;
       e.preventDefault()
       if(!minPice && !maxPice && !searchTerm) {
-        alert('wpisz wszystkie dane!')
+        alert('fill in all the data!')
       } else {
         history.push(`${home}/${values.minPrice}/${values.maxPrice}/${values.searchTerm}`);
         console.log(history.location)
