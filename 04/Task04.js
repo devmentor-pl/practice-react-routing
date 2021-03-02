@@ -11,8 +11,9 @@ const Task04 = () => {
 
     const options = [
            { path: home, text: "--choose--"},
-           { path: 'sortedDescending', text: "descending prices"},
-           { path: 'sortedAscending', text: "ascending prices"},
+           { path: `${home}/sortedDescending`, text: "descending prices"},
+           { path: `${home}/sortedAscending`, text: "ascending prices"},
+           { path: `${home}/sortedAlphabetically`, text: "alphabetically(description)"},
     ];
 
       const handleChange = event => {
@@ -25,7 +26,14 @@ const Task04 = () => {
         return <Shop products={sortingFunction[sortParam]()} />;
       };
 
-   
+    // const render = () => {
+    //     <>
+    //     <Route exact path={home}>
+    //     <Shop products={products} />
+    //     </Route>
+
+    //     <Route path={`${home}/:sortParam`} component={sortedProducts} />
+    //   </>
 
     const sortingFunction = {
         sortedAscending:  () => {
@@ -33,6 +41,13 @@ const Task04 = () => {
         },
         sortedDescending: () => {
             return [...products].sort((a, b) => b.price - a.price
+        )},
+        sortedAlphabetically: () => {
+            return [...products].sort((a, b) =>     {
+                if(a.description < b.description) { return -1; }
+                if(a.description > b.description) { return 1; }
+                return 0;
+            }
         )},
     }
 
@@ -44,12 +59,13 @@ const Task04 = () => {
             {options.map(({path, text}) => (<option key={path} value={path}> {text}  </option> ))}
             </select>
 
-            <Route exact path={home}>
-              <Shop products={products} />
-            </Route>
+           {/* {render} */}
+                 {/* chciałam to wydzielić ---->>>>>>, ale nie wiem jak w tym przypadku? jak dam funkcję strzałkową to nie widzi  */}
+         <Route exact path={home}>
+           <Shop products={products} />
+         </Route>
 
-            <Route path={`${home}/:sortParam`} component={sortedProducts} />
-    
+         <Route path={`${home}/:sortParam`} component={sortedProducts} />
         </React.Fragment>
     );
 }
