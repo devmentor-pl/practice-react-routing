@@ -7,66 +7,51 @@ import { Route } from 'react-router-dom';
 
 const Task04 = () => {
     const history = useHistory();
+    const home = `/task04`;
 
- 
     const options = [
-           { path: "/", text: "--choose--"},
-           { path: "/price-desc", text: "descending price"},
-           { path: "/price-asc", text: "ascending prices"},
+           { path: home, text: "--choose--"},
+           { path: 'sortedDescending', text: "descending prices"},
+           { path: 'sortedAscending', text: "ascending prices"},
     ];
 
-
       const handleChange = event => {
-      history.push( event.target.value );
+          history.push(event.target.value );
       }
 
+      const sortedProducts = ({ match }) => {
+        const { sortParam } = match.params;
 
-      const renderSortedProducts = () => {
-    
-        return options.map(({path}) => {
-        if(path == "/") {
+        return <Shop products={sortingFunction[sortParam]()} />;
+      };
 
-           return  <Shop products={products} />
-             
-       
-        } else if(path == "/price-desc") {
-            <Shop products={sortByPriceAsc} />
-        } else if(path == "/price-asc") {            
-            <Shop products={sortByPriceDesc} />
-        }
+   
 
-       })
-      }
-
-       const sortByPriceAsc = products.sort((a,b) => a.price - b.price )
-       console.log(sortByPriceAsc)
-       const sortByPriceDesc = products.sort((a,b) => b.price - a.price )
-       console.log(sortByPriceDesc)
- 
-
+    const sortingFunction = {
+        sortedAscending:  () => {
+            return [...products].sort((a, b) => a.price - b.price)
+        },
+        sortedDescending: () => {
+            return [...products].sort((a, b) => b.price - a.price
+        )},
+    }
 
     return (
         <React.Fragment>
         <h1>Task04</h1>
             <span>sort products by:</span>
-            <select
-             onChange={handleChange}
-            >
-            {options.map(({path, text}) => (
-                <option key={path} value={`/task04${path}`}>
-                {text}
-                </option>
-            ))}
+            <select onChange={handleChange} >
+            {options.map(({path, text}) => (<option key={path} value={path}> {text}  </option> ))}
             </select>
-            {/* <Route exact path='/'>
-                <Shop products={products} />
-            </Route> */}
 
-          {renderSortedProducts()}
-   
+            <Route exact path={home}>
+              <Shop products={products} />
+            </Route>
+
+            <Route path={`${home}/:sortParam`} component={sortedProducts} />
+    
         </React.Fragment>
     );
-
 }
 
 export default Task04;
