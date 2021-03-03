@@ -3,7 +3,7 @@ import products from '../src/products.json'
 import { Route } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import Shop from '../src/components/Shop'
-import Product from '../src/components/Product';
+
 
 
 const Task05 = () => {
@@ -12,25 +12,24 @@ const Task05 = () => {
 
     const sortedProducts = ({ match }) => {
       const { minPrice, maxPrice, searchTerm } = match.params;
-      sortByPrice(minPrice, maxPrice)
-      sortBySearchTerm(searchTerm)
-      return null;
+      return sortingFun(searchTerm, minPrice, maxPrice)
+   
     };
 
-
-      const sortBySearchTerm = searchTerm => {
+      const sortingFun = (searchTerm, minPrice,maxPrice) => {
         const searchedWord = searchTerm.toLowerCase();
-        const sortedProduct = products.filter(({name}) => name.toLowerCase().includes(searchedWord))
-        console.log(sortedProduct)
-        
+        const sortedProduct = products.filter(({name}) => name.toLowerCase().includes(searchedWord)) && products.filter(({price}) => price >= minPrice && price <= maxPrice)
+
+
+        // if(sortedProduct.length === 0) {
+        //     alert('no results found :(')
+        //   } else {    <== JAK POWINNM TU NAPISAC WARUNEK ? CO ROBIĘ NIE TAK?
+        //       return <Shop products={sortedProduct} />
+        //   }
+          return <Shop products={sortedProduct} />;
       }
 
-      const sortByPrice = (minPrice, maxPrice) => {
-        const filtredProducts = products.filter(function(product){
-        return product.price >= minPrice && product.price <= maxPrice
-        });
-        console.log(filtredProducts)
-      }
+
 
   
       const [values, setValues] = useState({
@@ -39,30 +38,30 @@ const Task05 = () => {
       searchTerm: '',
       })
 
-    const handleChange = e => {
-      const {name, value} = e.target
-      setValues({
-          ...values,
-          [name]: value
-      })
-    }
-
-    const handleSubmit = e => {
-      const {minPice, maxPice, searchTerm} = values;
-      e.preventDefault()
-      if(!minPice && !maxPice && !searchTerm) {
-        alert('fill in all the data!')
-      } else {
-        history.push(`${home}/${values.minPrice}/${values.maxPrice}/${values.searchTerm}`);
-        console.log(history.location)
+      const handleChange = e => {
+        const {name, value} = e.target
         setValues({
-          minPrice: '',
-          maxPrice: '',
-          searchTerm: '',
+            ...values,
+            [name]: value
         })
       }
 
-    }
+      const handleSubmit = e => {
+        const {minPice, maxPice, searchTerm} = values;
+        e.preventDefault()
+        if(!minPice && !maxPice && !searchTerm) {
+          alert('fill in all the data!')
+        } else {
+          history.push(`${home}/${values.minPrice}/${values.maxPrice}/${values.searchTerm}`);
+          console.log(history.location)
+          setValues({
+            minPrice: '',
+            maxPrice: '',
+            searchTerm: '',
+          })
+        }
+
+      }
   
 
     return (
