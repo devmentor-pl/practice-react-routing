@@ -15,25 +15,39 @@ const Task05 = () => {
         return sortingFun(minPrice, maxPrice, searchTerm)
     
       };
+      const sortingFun = (
+        minPrice = 0,
+        maxPrice = Number.MAX_VALUE,
+        searchTerm = ''
+    ) => {
+        // console.log(minPrice, maxPrice, searchTerm);
+        // zrobiłbym sortowanie dla każdego elementu z osobna
+        // dla lepszej ptymalizacji można zrobić if-y poza .filter()
+        let sortedProducts = products
+            .filter(({ price }) => price >= minPrice)
+            .filter(({ price }) => price <= maxPrice)
+            .filter(({ name }) => {
+                if (!searchTerm) return true;
 
-      const sortingFun = (minPrice = '0',  maxPrice = '100', searchTerm = '') => {
-       const sortedAllProducts  = products.filter(({price, name}) => {
-         let sortedProductByPrice = price >= minPrice && price <= maxPrice
+                return name.toLowerCase().includes(searchTerm.toLowerCase());
+            });
 
-          if(sortedProductByPrice && searchTerm.length !== 0 ) {
+        // const sortedAllProducts = products.filter(({ price, name }) => {
+        //     let sortedProductByPrice = price >= minPrice && price <= maxPrice;
 
-            const searchedWord = searchTerm.toLowerCase();
-            const sortedProductByWord = name.toLowerCase().includes(searchedWord)
-       
-            if(sortedProductByWord) {
-             return name;
-            }
+        //     if (sorte}dProductByPrice && searchTerm.length !== 0) {
+        //         const searchedWord = searchTerm.toLowerCase();
+        //         const sortedProductByWord = name
+        //             .toLowerCase()
+        //             .includes(searchedWord);
 
-          }      
-          
-       })
-       return <Shop products={sortedAllProducts} />;
-      }
+        //         if (sortedProductByWord) {
+        //             return name;
+        //         }
+        //     }
+        // });
+        return <Shop products={sortedProducts} />;
+    };
    
 
   
@@ -55,7 +69,8 @@ const Task05 = () => {
         const {minPrice, maxPrice, searchTerm} = values;
         e.preventDefault()
     
-          history.push(`${home}/${minPrice}/${maxPrice}/${searchTerm}`);
+        history.push(`${home}/${minPrice},${maxPrice}-${searchTerm}`);
+
           setValues({
             minPrice: '',
             maxPrice: '',
@@ -104,9 +119,11 @@ const Task05 = () => {
         <Shop products={products} />
       </Route>
 
-      <Route path={`${home}/:minPrice/:maxPrice/:searchTerm`} component={sortedProducts} />
-      <Route path={`${home}/:minPrice/:maxPrice`} component={sortedProducts} />
-      <Route path={`${home}/:searchTerm`} component={sortedProducts} />
+      <Route
+                exact
+                path={`${home}/:minPrice?,:maxPrice?-:searchTerm?`}
+                component={sortedProducts}
+            />
 
       </>
   );
