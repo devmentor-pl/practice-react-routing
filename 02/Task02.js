@@ -4,7 +4,6 @@ import { Switch, Route, Link, useRouteMatch } from 'react-router-dom';
 
 import products from '../src/products.json';
 
-
 const Task02 = () => {
     const { path } = useRouteMatch();
     const productList = products.map(product => (
@@ -34,16 +33,3 @@ const Task02 = () => {
 }
 
 export default Task02;
-
-
-// {
-//     products.map((product) => {
-//         console.log('🚀 ~ {products.map ~ product', product);
-//         return (
-//             <Route exact path={`/task02/product-:id`} key={product.id}>
-//                 <Product {...product} />
-//             </Route>
-//         );
-//     });
-// }
-
