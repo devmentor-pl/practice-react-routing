@@ -19,12 +19,12 @@ const Task03 = () => {
     const nav = () => {
         const categoriesObject = new Set(products.map((product) => product.category));
         const categories = Array.from(categoriesObject);
-        return categories.map((c) => (
-            <li key={c}>
+        return categories.map((cat) => (
+            <li key={cat}>
                 <NavLink
-                    to={`${url}/${c.toLowerCase()}`}
+                    to={`${url}/${cat.toLowerCase()}`}
                 >
-                    {c} 
+                    {cat}
                 </NavLink>
             </li>
         ));
