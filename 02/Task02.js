@@ -7,16 +7,14 @@ import products from '../src/products.json';
 
 const Task02 = () => {
     const { path } = useRouteMatch();
-
-    const productList = products.map(product => {
-            return (
+    const productList = products.map(product => (
                 <li key={product.id}>
                     <Link to={`${path}/product-${product.id}`}>
                         {product.name}
                     </Link>
                 </li>
-            );
-    });
+            )
+    );
 
     return (
         <>
@@ -27,7 +25,7 @@ const Task02 = () => {
                     path="/task02/product-:id"
                     render={(props) => {
                         const { id } = props.match.params;
-                        const productProps = products.find(p => p.id === Number(id));
+                        const [productProps = {}] = products.filter(p => p.id === Number(id));
                         return <Product {...productProps} />
                 }}/>
             </Switch>
