@@ -15,38 +15,34 @@ const Task03 = () => {
     const categoriesObject = new Set(products.map(product => product.category));
     const categories = Array.from(categoriesObject);
 
-    const route = useRouteMatch();
-    const { category } = useParams();
-    const loca = useLocation();
+    const { path } = useRouteMatch();
+    // const { category } = useParams();
+    // const loca = useLocation();
 
     return (
         <>
             <h1>Task03</h1>
             <Switch>
-                
-                <Route 
-                    path="/task03/"
+                <Route
                     exact
-                    render={props => {
-                        return <Shop products={products}/>
-                        }
-                    }/>
+                    path={`${path}`}
+                    render={(props) => {
+                        return <Shop products={products} />;
+                    }}
+                />
 
-                <Route path="/task03/:category" render={({match}) => {
-                    return products.map(product => {
-                        if (product.category.toLowerCase() == match.params.category) {
+                <Route
+                    path={`${path}/:category`}
+                    render={({ match }) => {
+                        const filteredProducts = products.filter(p => {
                             return (
-                                <Shop
-                                    products={products.filter(
-                                        (p) =>
-                                            p.category.toLowerCase() ==
-                                            match.params.category
-                                    )}
-                                />
+                                p.category.toLowerCase() ===
+                                match.params.category
                             );
-                        }
-                    })
-                }} />
+                        })
+                        return <Shop products={filteredProducts} />
+                    }}
+                />
             </Switch>
         </>
     );
