@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Route, useHistory } from 'react-router-dom';
 
+import Shop from '../src/components/Shop';
+
 import products from '../src/products.json';
 
 const Task05 = () => {
@@ -61,12 +63,16 @@ const Task05 = () => {
 
     const routes = () => (
         <Route
-            exact
-            path={`/task05/:minPrice?,:maxPrice?-:searchTerm?`}
+            path="/task05/:minPrice?,:maxPrice?-:searchTerm?"
             render={({ match }) => {
-                const { minPrice, maxPrice, searchTerm } = match.params;
-                const filteredProducts = () => products.filter((p) => p.id === 1);
-                return <Shop product={filteredProducts()} />;
+                const highestPrice = Math.max(...products.map(p => p.price));
+                const { minPrice = 0, maxPrice = highestPrice, searchTerm = '' } = match.params;
+                const filteredProducts = products.filter((p) => {
+                    if (p.price > minPrice && p.price <= maxPrice) {
+                        return p.name.toLowerCase().includes(searchTerm.toLowerCase()) || p.description.toLowerCase().includes(searchTerm.toLowerCase()) ? p : null;
+                    }
+                });
+                return <Shop products={filteredProducts} />;
             }}
         />
     );
@@ -81,4 +87,3 @@ const Task05 = () => {
 };
 
 export default Task05;
-// /:minPrice?,:maxPrice?-:searchTerm?
