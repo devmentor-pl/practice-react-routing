@@ -4,33 +4,39 @@ import Shop from '../src/components/Shop';
 import sortFn from '../src/helpers/sortFn';
 
 const SortedProducts = ({ match }) => {
-    const { sortMethod } = match.params;
-    return <Shop products={sortFn(sortMethod)} />;
+    const { sort } = match.params;
+    return <Shop products={sortFn(sort)} />;
 };
 
 const Task04 = () => {
     const history = useHistory();
     const handleSelect = ({ value }) => history.push(`/task04/${value}`);
+    const sortMethods = [
+        { method: '', label: 'Sort products:' },
+        { method: 'price-desc', label: 'Expensive first' },
+        { method: 'price-asc', label: 'Cheapest first' },
+        { method: 'alph-asc', label: 'A-Z' },
+        { method: 'alph-desc', label: 'Z-A' },
+    ];
+    const selectOptions = sortMethods.map((o) => (
+        <option value={o.method} key={o.method}>
+            {o.label}
+        </option>
+    ));
 
-    const sortSelector = () => (
-        <select onChange={(e) => handleSelect(e.target)}>
-            <option value="">Sort method</option>
-            <option value="price-desc">Expensive first</option>
-            <option value="price-asc">Cheapest first</option>
-            <option value="alph-asc">A-Z</option>
-            <option value="alph-desc">Z-A</option>
-        </select>
+    const sortSelector = (
+        <select onChange={(e) => handleSelect(e.target)}>{selectOptions}</select>
     );
 
-    const routes = () => (
-        <Route exact path="/task04/:sortMethod" component={SortedProducts} />
+    const routes = (
+        <Route exact path="/task04/:sort" component={SortedProducts} />
     );
 
     return (
         <>
             <h1>Task04</h1>
-            {sortSelector()}
-            {routes()}
+            {sortSelector}
+            {routes}
         </>
     );
 };
