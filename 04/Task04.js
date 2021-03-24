@@ -1,49 +1,65 @@
-import React, { useState } from 'react';
-import { Route, useHistory, useRouteMatch } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Route, useHistory, useParams } from 'react-router-dom';
 
 import Shop from '../src/components/Shop';
 
 import products from '../src/products.json';
 
 const Task04 = () => {
-    const [sortMethod, setSortMethod] = useState('');
-    const { path } = useRouteMatch();
     const history = useHistory();
-    console.log('🚀 ~ Task04 ~ history', history)
+    const [userSelection, setuserSelection] = useState('');
 
-    const handleChange = ({ value }) => setSortMethod(value);
+    useEffect(() => {
+        console.log('sortsort', userSelection);
+    }, [userSelection]);
 
-    const sortProducts = () => {
-        if (sortMethod === 'price-asc') {
-            return products.sort((a, b) => a.price - b.price);
-        } if (sortMethod === 'price-desc') {
-            return products.sort((a, b) => b.price - a.price);
-        }
-        return products;
+    const handleSelect = ({ value }) => {
+        history.push(`/task04/${value}`);
+        setuserSelection(value);
     };
 
-    const routes = (
-        <Route exact to={`${path}/${sortMethod}`}>
-            <Shop products={sortProducts()} />
-        </Route>
-    );
+    const sortSelector = () => {
+        console.log('select run');
+        return (
+            <select onChange={(e) => handleSelect(e.target)}>
+                <option value="">Sort method</option>
+                <option value="price-desc">descending</option>
+                <option value="price-asc">ascending</option>
+            </select>
+        );
+    };
 
-    const sortSelector = (
-        <select onChange={(e) => handleChange(e.target)}>
-            <option value="/">Sort method</option>
-            <option value="price-desc">descending</option>
-            <option value="price-asc">ascending</option>
-        </select>
+    const sortPriceDesc = () => products.sort((a, b) => a.price - b.price);
+    const sortPriceAsc = () => products.sort((a, b) => b.price - a.price);
+
+    const sortedProducts = () => {
+        // maybe switch should be binded to the path rather than user selection
+        switch (userSelection) {
+        case 'price-desc':
+            return sortPriceDesc();
+        case 'price-asc':
+            return sortPriceAsc();
+        default:
+            return products;
+        }
+    };
+
+    const routes = () => (
+        <Route path={`/task04/${userSelection}`}>
+            <Shop products={sortedProducts()} />
+        </Route>
     );
 
     return (
         <>
             <h1>Task04</h1>
-            {/* {nav} */}
-            {sortSelector}
-            {routes}
+            {sortSelector()}
+            {routes()}
         </>
     );
 };
 
 export default Task04;
+
+// SORTING
+// by id, by name, by price
