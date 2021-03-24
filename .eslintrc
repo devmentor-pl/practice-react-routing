@@ -11,6 +11,10 @@
             "warn",
             4
         ],
+        "max-len": [
+            "warn",
+            110
+        ],
         "react/jsx-indent": [
             "warn",
             4
