@@ -4,6 +4,7 @@ import { Route, useHistory } from 'react-router-dom';
 import Shop from '../src/components/Shop';
 
 import products from '../src/products.json';
+import inputFields from '../src/inputFields';
 
 const Task05 = () => {
     const initialState = {
@@ -22,57 +23,38 @@ const Task05 = () => {
 
     const handleChange = ({ name, value }) => setFilters({ ...filters, [name]: value });
 
-    const form = () => (
+    const renderInputFields = () => inputFields.map(({ name, type, placeholder }) => (
+        <label htmlFor={name} key={name}>
+            <input
+                type={type}
+                name={name}
+                id={name}
+                placeholder={placeholder}
+                onChange={(e) => handleChange(e.target)}
+                value={filters[name]}
+            />
+        </label>
+    ));
+
+    const form = (
         <form onSubmit={(e) => handleSubmit(e)}>
-            <label htmlFor="searchTerm">
-                <input
-                    type="text"
-                    name="searchTerm"
-                    id="searchTerm"
-                    placeholder="Search for products"
-                    onChange={(e) => handleChange(e.target)}
-                    value={filters.searchTerm}
-                />
-            </label>
-            <br />
-            <label htmlFor="minPrice">
-                <input
-                    type="number"
-                    name="minPrice"
-                    id="minPrice"
-                    placeholder="Min Price"
-                    onChange={(e) => handleChange(e.target)}
-                    value={filters.minPrice}
-                />
-            </label>
-            <br />
-            <label htmlFor="maxPrice">
-                <input
-                    type="number"
-                    name="maxPrice"
-                    id="maxPrice"
-                    placeholder="Max Price"
-                    onChange={(e) => handleChange(e.target)}
-                    value={filters.maxPrice}
-                />
-            </label>
-            <br />
+            {renderInputFields()}
             <button type="submit">Submit</button>
         </form>
     );
 
-    const routes = () => (
+    const routes = (
         <Route
             path="/task05/:minPrice?,:maxPrice?-:searchTerm?"
             render={({ match }) => {
-                const highestPrice = Math.max(...products.map(p => p.price));
+                const highestPrice = Math.max(...products.map((p) => p.price));
                 const { minPrice = 0, maxPrice = highestPrice, searchTerm = '' } = match.params;
                 const filteredProducts = products.filter((p) => {
                     if (p.price > minPrice && p.price <= maxPrice) {
                         return p.name.toLowerCase().includes(searchTerm.toLowerCase()) || p.description.toLowerCase().includes(searchTerm.toLowerCase()) ? p : null;
                     }
                 });
-                return <Shop products={filteredProducts} />;
+                return <Shop products={filteredProducts || products} />;
             }}
         />
     );
@@ -80,8 +62,8 @@ const Task05 = () => {
     return (
         <>
             <h1>Task05</h1>
-            {form()}
-            {routes()}
+            {form}
+            {routes}
         </>
     );
 };
