@@ -43,17 +43,27 @@ const Task05 = () => {
         </form>
     );
 
+    function checkIfInPriceRange(product, match) {
+        const highestPrice = Math.max(...products.map((p) => p.price));
+        const {
+            minPrice = 0,
+            maxPrice = highestPrice,
+            searchTerm = '',
+        } = match.params;
+
+        const priceMatch = product.price > minPrice && product.price <= maxPrice;
+        const descriptionMatch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) || product.description.toLowerCase().includes(searchTerm.toLowerCase());
+
+        if (priceMatch && descriptionMatch) {
+            return product;
+        }
+    }
+
     const routes = (
         <Route
             path="/task05/:minPrice?,:maxPrice?-:searchTerm?"
             render={({ match }) => {
-                const highestPrice = Math.max(...products.map((p) => p.price));
-                const { minPrice = 0, maxPrice = highestPrice, searchTerm = '' } = match.params;
-                const filteredProducts = products.filter((p) => {
-                    if (p.price > minPrice && p.price <= maxPrice) {
-                        return p.name.toLowerCase().includes(searchTerm.toLowerCase()) || p.description.toLowerCase().includes(searchTerm.toLowerCase()) ? p : null;
-                    }
-                });
+                const filteredProducts = products.filter((p) => checkIfInPriceRange(p, match));
                 return <Shop products={filteredProducts || products} />;
             }}
         />
