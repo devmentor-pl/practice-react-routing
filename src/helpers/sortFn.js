@@ -5,19 +5,12 @@ const sortPriceDesc = () => products.sort((a, b) => b.price - a.price);
 const sortAlphAsc = () => products.sort((a, b) => a.name.localeCompare(b.name));
 const sortAlphDesc = () => products.sort((a, b) => b.name.localeCompare(a.name));
 
-const sortProducts = (sort) => {
-    switch (sort) {
-    case 'price-desc':
-        return sortPriceDesc();
-    case 'price-asc':
-        return sortPriceAsc();
-    case 'alph-asc':
-        return sortAlphAsc();
-    case 'alph-desc':
-        return sortAlphDesc();
-    default:
-        return products;
-    }
-};
+const sorting = {};
+sorting['price-asc'] = sortPriceAsc;
+sorting['price-desc'] = sortPriceDesc;
+sorting['alph-asc'] = sortAlphAsc;
+sorting['alph-desc'] = sortAlphDesc;
+
+const sortProducts = (sort) => typeof sorting[sort] === 'function' && sorting[sort]();
 
 export default sortProducts;

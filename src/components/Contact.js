@@ -1,5 +1,10 @@
 import React from 'react';
+import DefaultLayout from '../components/layout/DefaultLayout';
 
-const Contact = () => <h2>Contact</h2>;
+const Contact = () => (
+    <DefaultLayout>
+        <h2>Contact</h2>
+    </DefaultLayout>
+);
 
 export default Contact;
