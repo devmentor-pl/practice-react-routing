@@ -1,16 +1,16 @@
-import React from 'react';
+import React from "react";
+import { Link } from "react-router-dom";
 
-const Product = ({name, description, price, link = null}) => {
+const Product = ({ name, description, price, link = null }) => {
+  const productTitle = link === null ? name : <Link to={link}>{name}</Link>;
 
-    const productTitle = link === null ? name : <a href={ link }>{name}</a>;
-    
-    return (
-        <article>
-            <h3>{productTitle}</h3>
-            <h4>{price}</h4>
-            <p>{description}</p>
-        </article>
-    );
-}
+  return (
+    <article>
+      <h3>{productTitle}</h3>
+      <h4>{price}</h4>
+      <p>{description}</p>
+    </article>
+  );
+};
 
 export default Product;
