@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Product = ({name, description, price, link = null}) => {
+const Product = ({name, descrption, price, link = null}) => {
 
     const productTitle = link === null ? name : <a href={ link }>{name}</a>;
     
@@ -8,7 +8,7 @@ const Product = ({name, description, price, link = null}) => {
         <article>
             <h3>{productTitle}</h3>
             <h4>{price}</h4>
-            <p>{description}</p>
+            <p>{descrption}</p>
         </article>
     );
 }
