@@ -1,5 +1,7 @@
 import React from 'react';
 
+
+
 const Product = ({name, description, price, link = null}) => {
 
     const productTitle = link === null ? name : <a href={ link }>{name}</a>;
