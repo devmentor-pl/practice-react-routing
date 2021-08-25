@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0c1e52ac-df16-4591-afb1-e0f4a611adc1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/discord.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/02/Task02.js" beforeDir="false" afterPath="$PROJECT_DIR$/02/Task02.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/04/Task04.js" beforeDir="false" afterPath="$PROJECT_DIR$/04/Task04.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/05/Task05.js" beforeDir="false" afterPath="$PROJECT_DIR$/05/Task05.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +58,7 @@
       <workItem from="1629902974202" duration="613000" />
       <workItem from="1629903606059" duration="671000" />
       <workItem from="1629906329309" duration="773000" />
-      <workItem from="1629907122646" duration="7201000" />
+      <workItem from="1629907122646" duration="7568000" />
     </task>
     <servers />
   </component>
