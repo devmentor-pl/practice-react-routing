@@ -1,5 +1,4 @@
 import React from 'react';
-import products from './../src/products.json';
 import Shop from "../src/components/Shop";
 import {Route, useHistory, useParams} from 'react-router-dom';
 import sortFunction from "../src/helpers/sortFunction";

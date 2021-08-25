@@ -6,9 +6,9 @@ const Task02 = () => {
 
 	const Product = () => {
 		const {id} = useParams();
-		const [productList = null] = products.filter((item) => item.id === parseInt(id));
+		const [product = null] = products.filter((item) => item.id === parseInt(id));
 
-		if (productList === null) {
+		if (product === null) {
 			return (
 				<section>
 					<p>Product that you are looking for not exists!</p>
@@ -16,7 +16,7 @@ const Task02 = () => {
 			)
 		}
 
-		const {name, description, category, price} = productList;
+		const {name, description, category, price} = product;
 
 		return (
 			<article data-id={id} >

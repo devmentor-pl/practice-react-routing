@@ -2,13 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0c1e52ac-df16-4591-afb1-e0f4a611adc1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/01/Task01.js" beforeDir="false" afterPath="$PROJECT_DIR$/01/Task01.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/discord.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/02/Task02.js" beforeDir="false" afterPath="$PROJECT_DIR$/02/Task02.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/03/Task03.js" beforeDir="false" afterPath="$PROJECT_DIR$/03/Task03.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/04/Task04.js" beforeDir="false" afterPath="$PROJECT_DIR$/04/Task04.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Shop.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Shop.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/products.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/products.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/05/Task05.js" beforeDir="false" afterPath="$PROJECT_DIR$/05/Task05.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,10 +41,11 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Color Scheme Font" />
+    <property name="settings.editor.selected.configurable" value="JavaScript.Libraries" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -60,10 +60,18 @@
       <workItem from="1629304004881" duration="2135000" />
       <workItem from="1629385531942" duration="2834000" />
       <workItem from="1629729871548" duration="8420000" />
+      <workItem from="1629902974202" duration="613000" />
+      <workItem from="1629903606059" duration="671000" />
+      <workItem from="1629906329309" duration="773000" />
+      <workItem from="1629907122646" duration="7201000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
