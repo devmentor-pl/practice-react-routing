@@ -17,7 +17,7 @@ const Task03 = () => {
 
     const CategoryRoute = (categoryName) => {
         const category = products.filter(
-            (item) => item.category == categoryName
+            (item) => item.category === categoryName
         );
 
         if (category === null) {
