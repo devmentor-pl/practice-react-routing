@@ -1,8 +1,7 @@
 import React from "react";
-import { Link, Route, useParams, Redirect } from "react-router-dom";
+import { Link, Route, Redirect } from "react-router-dom";
 import products from "./../src/products.json";
 import Shop from "../src/components/Shop";
-import Product from "../src/components/Product";
 
 const Task03 = () => {
     const categories = [
