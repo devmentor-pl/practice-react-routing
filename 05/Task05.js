@@ -31,27 +31,20 @@ const Task05 = () => {
         }
     };
 
-    const showProducts = ({ match }) => {
-        const {
-            min = getMinPrice(),
-            max = getMaxPrice(),
-            keyWord,
-        } = match.params;
-        console.log(min, max);
-
+    const ShowProducts = () => {
+        const { minPrice, maxPrice, keyWord = "" } = useParams();
         const filtered = products.filter(
             (item) =>
-                item.price > min &&
-                item.price < max &&
-                item.name.toLowerCase().includes(keyWord)
+                item.price > minPrice &&
+                item.price < maxPrice &&
+                item.name.toLowerCase().includes(keyWord.toLowerCase())
         );
-        console.log(filtered);
         return <Shop products={filtered} />;
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        /*history.push(`/task05/${minPrice}-${maxPrice}-${keyWord}`);*/
+        history.push(`/task05/${getMinPrice()}-${getMaxPrice()}-${keyWord}`);
         resetMinPrice();
         resetMaxPrice();
         resetKeyWord();
@@ -92,9 +85,8 @@ const Task05 = () => {
                 <button type="submit">Search</button>
             </form>
             <Route
-                path="/task05/show"
-                /*path="/task05/:minPrice-:maxPrice-:keyWord"*/
-                component={showProducts}
+                path="/task05/:minPrice-:maxPrice-:keyWord?"
+                component={ShowProducts}
             />
         </>
     );
