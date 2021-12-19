@@ -1,10 +1,18 @@
 import React from 'react';
 import Product from './Product';
 
-const Shop = (products) => {
+const Shop = ({ products, sort = '' }) => {
     return (
         <section>
-            { products.map(p => <Product {...p} />)}
+            { products
+                .sort((a, b) => {
+                    if(sort === 'asc') {
+                        return a.price - b.price;
+                    } else {
+                        return b.price - a.price;
+                    }
+                })
+                .map(p => <Product key={ p. id } {...p} />)}
         </section>
     );
 }
