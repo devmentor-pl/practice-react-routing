@@ -11,7 +11,7 @@ const Task04 = () => {
         setRedirect(e.target.value);
     }
     
-    const Task02 = () => {
+    const ProductsList = () => {
         redirect.endsWith('asc') 
         ? products.sort((a,b)=>a.price-b.price)
         : products.sort((a,b)=>b.price-a.price)
@@ -28,7 +28,7 @@ const Task04 = () => {
             </select>
             {redirect&& <>
             <Redirect to={redirect}/>
-            <Route path={redirect}>{Task02}</Route></>}
+            <Route path={redirect}>{ProductsList}</Route></>}
         </>
     );
 }
