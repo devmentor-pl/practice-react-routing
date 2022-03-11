@@ -13,11 +13,8 @@ const Product = () => {
     
     const {id:idProd} = product
     
-    // zastanawiałąm się czy powinnam umieszczać w liscie skoro wyswietlany jest jeden produkt a nie cala lista ?
     return(
-        <ul>    
-            <li key={idProd}><ProductComponent {...product}/></li>
-        </ul>
+        <li key={idProd}><ProductComponent {...product}/></li>
     )
 }
 
@@ -27,7 +24,7 @@ const Task02 = () => {
         <>
             <h1>Task02</h1>
             <Switch>
-                <Route exact path='/task02/:product-:id'><Product/></Route>
+                <Route exact path='/task02/:product-:id'><ul><Product/></ul></Route>
             </Switch>
         </>
     );

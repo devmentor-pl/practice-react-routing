@@ -29,9 +29,8 @@ const Task05 = () => {
     }
   
     const ProductsList = () => {
-        const {minPrice, maxPrice, searchTerm} = useParams();
+        const {minPrice, maxPrice, searchTerm=''} = useParams();
         const copyProductsList = products.filter(item=>item.name.toLowerCase().includes(`${searchTerm}`) && item.price >=minPrice && item.price<=maxPrice)
-       
         return <Shop products={copyProductsList}/>
     }
 
@@ -45,10 +44,9 @@ const Task05 = () => {
                 <input type="number" name="maxPrice" value={maxPrice} onChange={handleChange}/>
                 <input type="submit"/>
             </form>
-            <Route path='/task05/:minPrice,:maxPrice-:searchTerm'> <ProductsList/></Route>
+            <Route path='/task05/:minPrice,:maxPrice-:searchTerm?'> <ProductsList/></Route>
         </>
     );
 }
 
 export default Task05;
-

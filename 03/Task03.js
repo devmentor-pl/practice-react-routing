@@ -7,7 +7,9 @@ import categories from './../src/categories.json';
 
 const Task03 = () => {
     const nav = categories.map(item=>(
-        <li key={item.id}><Link to={`/task03/${item.url}`}>{item.category}</Link></li>
+        <ul>
+            <li key={item.id}><Link to={`/task03/${item.url}`}>{item.category}</Link></li>
+        </ul>
     ))
     
     const routes = categories.map(item=>{
@@ -29,5 +31,3 @@ const Task03 = () => {
 }
 
 export default Task03;
-
-
