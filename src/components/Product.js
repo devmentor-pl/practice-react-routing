@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Product = ({ name, description, price, link = null }) => {
+const Product = ({ id, name, description, price, link = null }) => {
 
     const productTitle = link === null
         ? name
@@ -15,7 +15,11 @@ const Product = ({ name, description, price, link = null }) => {
                     ? <h3>{productTitle}</h3>
                     : (
                         <div>
-                            <div>Tytuł: {name}</div>
+                            <div>
+                                Tytuł: <Link to={'/task02/product-'+id}>
+                                {name}
+                                </Link>
+                            </div>
                             <div>Opis: {description}</div>
                             <div>Cena: {price}</div>
                         </div>
