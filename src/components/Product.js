@@ -12,12 +12,19 @@ const Product = ({ id, name, description, price, link = null }) => {
         <article>
             {
                 link
-                    ? <h3>{productTitle}</h3>
+                    ? (
+                        <>
+                            <div>{productTitle}</div>
+                            {/* <div>Opis: {description}</div> */}
+                            {/* <div>Cena: {price}</div> */}
+                        </>
+                    )
                     : (
                         <div>
+                            <hr />
                             <div>
-                                Tytuł: <Link to={'/task02/product-'+id}>
-                                {name}
+                                Tytuł: <Link to={'/task02/product-' + id}>
+                                    {name}
                                 </Link>
                             </div>
                             <div>Opis: {description}</div>
@@ -25,8 +32,6 @@ const Product = ({ id, name, description, price, link = null }) => {
                         </div>
                     )
             }
-
-
         </article>
     );
 }
