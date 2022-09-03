@@ -26,6 +26,11 @@ const Shop = ({ products }) => {
                                 {...p}
                             />
                         </Route>
+                        <Route exact path={'/task05/:search'}>
+                            <Product
+                                {...p}
+                            />
+                        </Route>
                     </Switch>
 
                 )
