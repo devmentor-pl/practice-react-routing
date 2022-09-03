@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import Product from './Product';
 
 const Shop = ({ products }) => {
+    console.log( products )
     return (
         <section>
             {
