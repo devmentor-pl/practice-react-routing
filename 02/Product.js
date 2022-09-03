@@ -5,11 +5,11 @@ import { Redirect } from 'react-router-dom'
 import products from '../src/products.json'
 
 const Product = (props) => {
-    console.log(props)
+    // console.log(props)
     const id = props.match.params.id
 
     const [showProduct = null] = products.filter(product => product.id === +id)
-    console.log(showProduct)
+    // console.log(showProduct)
 
     if(showProduct === null) {
         return <Redirect to='product/Error404' />

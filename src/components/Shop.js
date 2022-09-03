@@ -12,20 +12,21 @@ const Shop = ({ products }) => {
                         link={'/task03/category/' + p.category}
                     />)
             }
-            <Route path='/task03/category/JavaScript'>
+            {/* <Route path='/task03/category/JavaScript'>
                 <h3>Wybrano JavaScript</h3>
-            </Route>
-            <Route path='/task03/category/React'>
+            </Route> */}
+            {/* <Route path='/task03/category/React'>
                 <h3>Wybrano React</h3>
-            </Route>
+            </Route> */}
 
             {
                 products.map(p =>
                     <Route path={'/task03/category/' + p.category}>
-                        <h3>Wybrano kategorie {p.category}</h3>
+                        {/* <h3>Wybrano kategorie {p.category}</h3> */}
                         <Product
                             {...p}
                         />
+                        <br />
                     </Route>
                 )
             }
