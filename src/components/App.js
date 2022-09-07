@@ -20,7 +20,7 @@ const App = () => {
         <Router>
             <nav>
                 <ul>
-                    { routes.map(item => <li key={item.url}><Link to={item.url}>{item.text}</Link></li>) }
+                    {routes.map(item => <li key={item.url}><Link to={item.url}>{item.text}</Link></li>) }
                 </ul>
             </nav>
             <Switch>
