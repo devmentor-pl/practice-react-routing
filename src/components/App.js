@@ -1,5 +1,5 @@
 import React from 'react';
-import {HashRouter as Router, Switch, Route, Link} from 'react-router-dom'
+import {HashRouter as Router, Switch, Route, Link, Redirect} from 'react-router-dom'
 
 import Task01 from './../../01/Task01';
 import Task02 from './../../02/Task02';
@@ -32,6 +32,9 @@ const App = () => {
                 <Route path='/task04' component={Task04}/>
                 <Route path='/task05' component={Task05}/>
                 <Route path='/404' component={NotFound}/>
+                <Route>
+                    <Redirect to="/404" />
+                </Route>
             </Switch>
         </Router>
     )
