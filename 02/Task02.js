@@ -9,7 +9,7 @@ const Task02 = () => {
             <h1>Task02</h1>
             {products.map((product) => {
                 return (<>
-                    <li><Link to={`/task02/product-${product.id}`}>{product.name}</Link></li>
+                    <li><Link to={`/task02/product-${product.id}`}>Id: {product.id} - {product.name}</Link></li>
                     <Route key={product.id} path={`/task02/product-${product.id}`}>
                         <Product name={product.name} description={product.description} price={product.price} />
                     </Route>
