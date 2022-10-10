@@ -1,9 +1,10 @@
 import React from 'react';
-import { Route, Link } from 'react-router-dom'
+import { Route, Link, useParams } from 'react-router-dom'
 import Product from '../src/components/Product';
 import products from '../src/products.json'
 
 const Task02 = () => {
+
     return (
         <>
             <h1>Task02</h1>

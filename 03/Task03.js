@@ -1,8 +1,14 @@
 import React from 'react';
-import { Route, NavLink } from 'react-router-dom'
+import { Route, NavLink, useParams } from 'react-router-dom'
 import Shop from '../src/components/Shop'
 
 import products from './../src/products.json';
+
+const Categories = () => {
+    const { category } = useParams()
+    const items = products.filter(product => category.toLowerCase() === product.category.toLowerCase())
+    return <Shop products={items} />
+}
 
 const Task03 = () => {
     return (
@@ -21,18 +27,9 @@ const Task03 = () => {
             <Route exact path='/task03/'>
                 <Shop products={products} />
             </Route>
-            <Route path='/task03/react'>
-                <Shop products={products.filter(item => {
-                    return item.category === 'React'
-                })} />
+            <Route path='/task03/:category'>
+                <Categories />
             </Route>
-            <Route path='/task03/javascript'>
-                <Shop products={products.filter(item => {
-                    return item.category === 'JavaScript'
-                })} />
-            </Route>
-
-
         </>
 
     );
