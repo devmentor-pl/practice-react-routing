@@ -44,7 +44,7 @@ const CategoryPage = () => {
 
 const SimpleShop = ({ productList }) => {
   return productList.map((product) => (
-    <Productroduct key={product.id} {...product} />
+    <Product key={product.id} {...product} />
   ));
 };
 
