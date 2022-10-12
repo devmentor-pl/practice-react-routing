@@ -1,9 +1,9 @@
 import React from "react";
 import products from "../products.json";
-import { Redirect, useParams } from "react-router-dom";
+import { Redirect, useParams, Link } from "react-router-dom";
 
 const Product = ({ name, description, price, link = null }) => {
-  const productTitle = link === null ? name : <a href={link}>{name}</a>;
+  const productTitle = link === null ? name : <Link to={link}>{name}</Link>;
 
   return (
     <article>
@@ -13,6 +13,7 @@ const Product = ({ name, description, price, link = null }) => {
     </article>
   );
 };
+
 
 const ProductPage = () => {
   const { id } = useParams();

@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, NavLink } from "react-router-dom";
 import products from "./../src/products.json";
-import Shop from "../src/components/Shop";
+import {Shop, CategoryPage} from "../src/components/Shop";
 
 const Task03 = () => {
   return (
@@ -25,8 +25,13 @@ const Task03 = () => {
           </NavLink>
         </li>
       </ul>
-      <Route path="/task03/:category">
+
+      <Route exact path="/task03">
         <Shop products={products} />
+      </Route>
+
+      <Route path="/task03/:category">
+        <CategoryPage/>
       </Route>
     </>
   );
