@@ -42,4 +42,10 @@ const CategoryPage = () => {
   return <Shop products={productsInCategory} />;
 };
 
-export { Shop, CategoryPage };
+const SimpleShop = ({ productList }) => {
+  return productList.map((product) => (
+    <Productroduct key={product.id} {...product} />
+  ));
+};
+
+export { Shop, CategoryPage, SimpleShop };
