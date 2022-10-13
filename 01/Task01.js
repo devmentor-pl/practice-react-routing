@@ -6,7 +6,7 @@ import Contact from '../src/components/Contact'
 
 const Task01 = () => {
     const activeStyle = { backgroundColor: '#bbb', borderRadius: '5px', }
-    const activeClass = 'active';
+    const activeClass = 'active'
 
     return (
         <>
