@@ -9,7 +9,7 @@ const Product = ({id, name, description, price, category}) => {
                     {name}
                 </Link>
             </h1>
-            <h2>{price}</h2>
+            <h2>{price}zł</h2>
             <h3>{category}</h3>
             <p>{description}</p>
         </article>
