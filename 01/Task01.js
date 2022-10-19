@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link, Route, Switch } from 'react-router-dom'
-import Home from '../src/components/Home';
-import Contact from '../src/components/Contact';
+import Home from './../src/components/Home'
+import Contact from './../src/components/Contact'
+import {Link, NavLink, Route} from 'react-router-dom'
 
 const Task01 = () => {
     return (
@@ -9,21 +9,26 @@ const Task01 = () => {
             <h1>Task01</h1>
             <ul>
                 <li>
-                    <Link to="/task01/home">Home</Link>
+                    <NavLink 
+                        to='/task01/home'
+                        activeStyle={{border: '1px solid red'}}
+                    >Home</NavLink>
                 </li>
                 <li>
-                    <Link to="/task01/contact">Contact</Link>
+                    <NavLink 
+                        to='/task01/contact'
+                        activeStyle={{border: '1px solid red'}}
+                    >Contact</NavLink>
                 </li>
             </ul>
             <hr />
-            <Switch>
-                <Route path='/task01/home'>
-                    <Home />
-                </Route>
-                <Route path='/task01/contact'>
-                    <Contact />
-                </Route>
-            </Switch>
+            {/* Home will have object of Route */}
+            <Route path='/task01/home' component={Home} />
+
+            {/* <Route path='/task01/contact' component={Contact} /> */}
+            <Route path='/task01/contact'>
+                <Contact />
+            </Route>
         </div>
     );
 }

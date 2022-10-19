@@ -1,76 +1,50 @@
 import React from 'react';
-import Shop from '../src/components/Shop';
-import products from './../src/products.json';
-import { Link, Route, Switch, Redirect } from 'react-router-dom';
-import { useHistory } from 'react-router-dom'
+import { Redirect, Route, useHistory } from 'react-router-dom'
+import Shop from './../src/components/Shop'
+import products from './../src/products.json'
 
 const Task04 = () => {
-    function compareUp(a, b) {
-        if (a.price > b.price) {
-            return -1;
-        }
-        if (a.price < b.price) {
-            return 1;
-        }
-        return 0;
-    }
-    function compareDown(a, b) {
-        if (a.price < b.price) {
-            return -1;
-        }
-        if (a.price > b.price) {
-            return 1;
-        }
-        return 0;
-    }
-
-    const productsSortUp = [...products].sort(compareUp);
-    const productsSortDown = [...products].sort(compareDown);
-
-    // redirect for select
     const history = useHistory()
-    const handleSelect = e => {
-        console.log('select')
-        setSelect(e.target.value)
-        history.push(e.target.value)
-    }
 
-    const [select, setSelect] = React.useState('')
-    console.log(select)
+    // useHistory
+    // -----------------
+    const selectChange = e => {
+        const url = e.target.value
+        console.log(url)
+        const sortValues = ['none', 'price-asc', 'price-desc']
+        if (sortValues.includes(url)) {
+            history.push('/task04/' + url)
+        } else {
+            history.push('/404')
+        }
+    }
 
     return (
         <div>
             <h1>Task04</h1>
-            <h3>Sort by Link</h3>
-            <ul>
-                <li>
-                    <Link to='/task04/price-desc'>Products price-desc - Ceny malejąco</Link>
-                </li>
-                <li>
-                    <Link to="/task04/price-asc">Products price-asc - Ceny rosnąco</Link>
-                </li>
-            </ul>
-            <hr />
-            <h3>Sort by select</h3>
-            <select onChange={handleSelect}>
-                <option value="/task04">Wybierz sort</option>
-                <option value="/task04/price-desc">Cena malejąco - Sort desc</option>
-                <option value="/task04/price-asc">Cena rosnąco - Sort asc</option>
+            <div>task04/price-asc - price od najdroższego</div>
+            <div>task04/price-desc</div>
+            <br />
+            <select onChange={selectChange}>
+                <option value='none'>--- Wybierz sortowanie ---</option>
+                <option value='price-asc'>Od najdroższego</option>
+                <option value='price-desc'>Od najtańszego</option>
+                <option value='price-desc-xxx'>xxx yyy zzz</option>
             </select>
-            <br /><hr />
-
-            {/* redirect for Link */}
-            <Switch>
-                <Route path='/task04/price-desc'>
-                    <Shop products={productsSortUp} />
-                </Route>
-                <Route path='/task04/price-asc'>
-                    <Shop products={productsSortDown} />
-                </Route>
-            </Switch>
-
-            <br /><hr /><br />
-
+            <Route exact path='/task04/price-asc'>
+                <Shop list={[...products].sort((a, b) => b.price - a.price)} />
+            </Route>
+            <Route exact path='/task04/price-desc'>
+                <Shop list={[...products].sort((a, b) => a.price - b.price)} />
+            </Route>
+            <Route exact path='/task04/none'>
+                <Redirect to='/task04' />
+            </Route>
+            
+            {/* when in URL /task/04/aaaa it must by 404 - but fail */}
+            {/* <Route path='/task04/:nn'>
+                <Redirect to='404' />
+            </Route> */}
         </div>
     );
 }

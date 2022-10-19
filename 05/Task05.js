@@ -1,94 +1,91 @@
-import React from 'react';
-import Shop from '../src/components/Shop';
-import products from './../src/products.json';
-import { Link, Route, useParams } from 'react-router-dom'
-import { useHistory } from 'react-router-dom'
+import React, { useState } from 'react';
+import Shop from './../src/components/Shop'
+import products from './../src/products.json'
+import {Route, useHistory, useParams} from 'react-router-dom'
 
-let newProducts = products
+const SearchPage = () => {
+    const {minPrice, maxPrice, searchTerm = ''} = useParams()
+    console.log(searchTerm)
 
-const Art = () => {
-    const { min, max, search } = useParams()
-    // console.log(min)
-    // console.log(max)
-    // console.log(search)
-    let minCut = min.substring(1, min.length - 1)
-    let maxCut = max.substring(1, max.length - 1)
-    let searchCut = search.substring(1, search.length - 1)
-    // console.log(minCut)
-    // console.log(maxCut)
-    // console.log(searchCut)
-    newProducts = products.filter(product => {
-        return (
-            product.price >= parseInt(minCut) && 
-            product.price <= parseInt(maxCut) &&
-            product.name.toLowerCase().includes(searchCut.toLowerCase()) ||
-            product.description.toLowerCase().includes(searchCut.toLowerCase())
-        )
-    })
-    console.log( newProducts )
-    return (
-        <div>
-            <h2> Art Search </h2>
-            <div> {minCut},{maxCut}-{searchCut}</div>
-            <div> {min},{max}-{search}</div>
+    const filterByMinPrice = (price, products) => {
+        return isNaN(price) ? products : products.filter(p => p.price >= Number(price))
+    }
+    const filterByMaxPrice = (price, products) => {
+        return isNaN(price) ? products : products.filter(p => p.price <= Number(price))
+    }
+    const filterBySearch = (search, products) => {
+        const searchUpper = search.toUpperCase()
+        return search.length === 0 ? products : products.filter(p => 
+            p.name.toUpperCase().includes(searchUpper) || p.description.toUpperCase().includes(searchUpper))
+        
+    }
+
+    const productAfterMinPrice = filterByMinPrice(minPrice, products)
+    const productAfterMaxPrice = filterByMaxPrice(maxPrice, productAfterMinPrice)
+    const productsAfterSearch = filterBySearch(searchTerm, productAfterMaxPrice)
+
+    console.log(productAfterMinPrice)
+    console.log(productAfterMaxPrice)
+    console.log(productsAfterSearch)
+
+    return <div>
+        <h4>SearchPage - useParams</h4>
+            <p>{minPrice}, {maxPrice}, {searchTerm}</p>
+            <Shop list={productsAfterSearch}/>
         </div>
-    )
 }
 
 const Task05 = () => {
     const history = useHistory()
-    const [search, setSearch] = React.useState('')
-    const [min, setMin] = React.useState('')
-    const [max, setMax] = React.useState('')
 
-    const handleInput = e => {
-        const value = e.target.value
+    const initSearch = {
+        text: '',
+        priceMin: '',
+        priceMax: '',
+    }
+    const [form, setForm] = useState(initSearch)
+
+    const onInput = e => {
+        const value = e.target.value 
         const name = e.target.name
-
-        if (name === 'min') {
-            setMin(value)
-            history.push('/task05/[' + value + '],[' + max + ']-[' + search + ']')
-        }
-        if (name === 'max') {
-            setMax(value)
-            history.push('/task05/[' + min + '],[' + value + ']-[' + search + ']')
-        }
-        if (name === 'search') {
-            setSearch(value)
-            history.push('/task05/[' + min + '],[' + max + ']-[' + value + ']')
-        }
+        console.log(name, value)
+        setForm(prev => ({...prev, [name]: value}))
+        // setForm(prev => {
+        //     return {
+        //         ...prev,
+        //         [name]: value
+        //     }
+        // })
     }
 
+    const onSubmit = e => {
+        e.preventDefault()
+        console.log('submit')
+        history.push(`/task05/${form.priceMin},${form.priceMax},${form.text}`)
+        
+    }
     return (
         <div>
             <h1>Task05</h1>
-            <form>
-                <label htmlFor="min">min
-                    <input type="number" name='min'  
-                        value={min} 
-                        onChange={handleInput} 
-                    /><br />
-                </label>
-                <label htmlFor="max">max
-                    <input type="number" name='max' 
-                        value={max} 
-                        onChange={handleInput} 
-                    /><br />
-                </label>
-                <label htmlFor="search">search
-                    <input type="text" name='search' 
-                        value={search} 
-                        onChange={handleInput}
-                    /><br />
-                </label>
+            <form onSubmit={onSubmit}>
+                <div>
+                    <label htmlFor="phrase">Fraza</label>
+                    <input type="text" name='text' value={form.text} onChange={onInput} />
+                </div>
+                <div>
+                    <label htmlFor="phrase">Cena min</label>
+                    <input type="text" name="priceMin" value={form.priceMin} onChange={onInput} />
+                </div>
+                <div>
+                    <label htmlFor="phrase">Cena max</label>
+                    <input type="text" name='priceMax' value={form.priceMax} onChange={onInput} />
+                </div>
+                <div><input type="submit" value='Send' /></div>
             </form>
-            <br />
 
-            <Route path={'/task05/:min,:max-:search'}>
-                <Art />
-                <Shop products={newProducts} />
+            <Route path='/task05/:minPrice?,:maxPrice?,:searchTerm?'>
+                <SearchPage />
             </Route>
-
         </div>
     );
 }
