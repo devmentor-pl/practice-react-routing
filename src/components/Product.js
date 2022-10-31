@@ -1,13 +1,12 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
-const Product = ({name, description, price, link = null}) => {
-
-    const productTitle = link === null ? name : <a href={ link }>{name}</a>;
-    
+const Product = ({id, name, price, category, description}) => {
     return (
         <article>
-            <h3>{productTitle}</h3>
-            <h4>{price}</h4>
+            <h1><Link to={`/task02/product-${id}`}>{name}</Link></h1>
+            <h2>{price}</h2>
+            <h3>{category}</h3>
             <p>{description}</p>
         </article>
     );

@@ -15,7 +15,7 @@ module.exports = function(env = {}) {
         // definiuje plik wejściowy
         mode: isProd ? 'production' : 'development',
         // definiuje tryb pracy webpack-a
-        devtool: isProd ? 
+        devtool: isProd ?
             'none' : 'eval-cheap-module-source-map',
         // definiuje identyfikację kodu źródłowego
         output: {
@@ -24,14 +24,14 @@ module.exports = function(env = {}) {
             filename: 'app.[hash].js',
             // definiuję nazwę pliku wyjściowego
         },
-        target: "web", 
+        target: "web",
         // niezbędne do uruchomienia automatycznego odświeżania z webpack-dev-server@3
         // https://github.com/webpack/webpack-dev-server/issues/2758
         module: {
             rules: [
                 {
                     test: /\.js$/,
-                    // określam jakie pliki 
+                    // określam jakie pliki
                     // będą brane pod uwagę
                     exclude: /node_modules/,
                     // określam wykluczenia
