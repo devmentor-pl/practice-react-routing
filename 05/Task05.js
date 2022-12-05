@@ -20,7 +20,7 @@ const SearchPage = () => {
 
     function filterBySearchTerm(searchTerm, products) {
         const searchTermLowerCase = searchTerm.toLowerCase();
-        return searchTerm.length === '' 
+        return searchTerm.length === 0 
             ? products : products.filter(p => (
                     p.name.toLowerCase().includes(searchTermLowerCase) 
                     || p.description.toLowerCase().includes(searchTermLowerCase)
