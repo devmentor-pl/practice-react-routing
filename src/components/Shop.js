@@ -1,11 +1,12 @@
 import React from 'react';
 import Product from './Product';
 import products from "./../products.json";
+import { useParams } from "react-router-dom";
 
-const Shop = ({ products }) => {
-  const prodCat = products.filter((prod) =>
-    prod.category.includes(prod.category)
-  );
+const Shop = () => {
+  const { category } = useParams();
+  console.log(category);
+  const prodCat = products.filter((prod) => prod.category.includes(category));
   console.log(products);
   return (
     <section>
