@@ -6,7 +6,7 @@ const Product = (props) => {
   return (
     <ul>
       <li>
-        {name} {description} {category} {price}
+        name: {name} description:{description} category:{category} price:{price}
       </li>
     </ul>
   );
