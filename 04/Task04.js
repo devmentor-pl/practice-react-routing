@@ -18,8 +18,9 @@ const Task04 = () => {
         <option value="/task04/name-alph">Sortuj alfabetycznie</option>
       </select>
       <Route path="/task04/:sorting">
-        <Shop main />
+        <Shop />
       </Route>
+      <Route exact path="/task04" component={() => <Shop main />} />
     </>
   );
 };

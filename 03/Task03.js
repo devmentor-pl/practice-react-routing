@@ -24,12 +24,3 @@ return (
 };
 
 export default Task03;
-
-/*     <>
-      <h1>Task03</h1>
-      <Shop products={products} />
-    </> */
-/* <Route exact path="/task03/" component={() => <Shop category={all} />} /> */
-/*     <Route exact path="/task03/">
-      <Shop category={all}/>
-    </Route> */
