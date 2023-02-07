@@ -15,7 +15,6 @@ const Task02 = () => {
       </section>
     );
 
-
   };
   return (
     <Router>
