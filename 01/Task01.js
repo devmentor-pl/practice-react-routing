@@ -17,13 +17,12 @@ const Task01 = () => {
             <h1>Task01</h1>
             {nav}
             <Route path="/task01/home">
-                <Home></Home>
+                <Home/>
             </Route>
             <Route path="/task01/contact">
-                <Contact></Contact>
+                <Contact/>
             </Route>
         </>
-        
     );
 }
 
