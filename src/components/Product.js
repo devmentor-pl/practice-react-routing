@@ -4,7 +4,7 @@ import products from "../products.json"
 
 const Product = (props) => {
     const { id } = useParams()
-    console.log(props,'props')
+
     
     const [product = null] = products.filter(p => p.id === parseInt(id))
 
