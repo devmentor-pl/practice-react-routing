@@ -1,11 +1,12 @@
 import React from 'react';
 import Product from './Product';
+const Shop = (props) => {
+    const {products} = props
 
-const Shop = (products) => {
     return (
         <section>
-            { products.map(p => <Product {...p} />)}
-        </section>
+           { products.map(p => <Product key={p.id} {...p} />)}
+         </section>
     );
 }
 
