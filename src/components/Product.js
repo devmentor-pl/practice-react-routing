@@ -1,25 +1,17 @@
 import React from "react";
-import { useParams, Redirect } from "react-router-dom";
+import { Route } from "react-router-dom";
 
-import products from "../products.json";
+// import products from "../products.json";
+import categories from '../categories.json'
 
-function Product() {
-  const { id } = useParams();
-  const [product = null] = products.filter(
-    (product) => product.id === parseInt(id)
-  );
-
-  if (product === null) return <Redirect to="/404.html" />;
-
-  const { name, description, category, price } = product;
-
+function Product({ name, description, category, price }) {
   return (
-    <section>
+    <article>
       <h3>{name}</h3>
       <p>{description}</p>
       <p>Cena: {price}</p>
       <p>Kategoria: {category}</p>
-    </section>
+    </article>
   );
 }
 
