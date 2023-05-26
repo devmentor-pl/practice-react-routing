@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
 import { useHistory, Switch, Route } from "react-router-dom";
 
 import products from "../src/products.json";
@@ -6,18 +6,32 @@ import Shop from "../src/components/Shop";
 
 const Task04 = () => {
   const history = useHistory();
+  const [sortedProducts, setSortedProducts] = useState(products);
+  const [currentOrder, setCurrentOrder] = useState("");
+
   const handleChange = (event) => {
     history.push(`/task04${event.target.value}`);
   };
-  const sortedProducts = (order) => {
-    if (order === "/task04/price-desc") {
-      return products.sort((a, b) => b.price - a.price);
-    } else if (order === "/task04/price-asc") {
-      return products.sort((a, b) => a.price - b.price);
-    }
+
+  const orderOptions = {
+    "/task04/price-desc": (a, b) => b.price - a.price,
+    "/task04/price-asc": (a, b) => a.price - b.price,
   };
 
-  console.log(history.location.pathname);
+  useEffect(() => {
+    const order = history.location.pathname;
+    setCurrentOrder(order);
+  }, [history.location.pathname]);
+
+  useEffect(() => {
+    const sortFunction = orderOptions[currentOrder];
+    if (sortFunction) {
+      const sorted = products.slice().sort(sortFunction);
+      setSortedProducts(sorted);
+    } else {
+      setSortedProducts(products);
+    }
+  }, [currentOrder]);
 
   return (
     <>
@@ -29,10 +43,7 @@ const Task04 = () => {
       </select>
       <Switch>
         <Route path="/task04">
-          <Shop products={products} />
-        </Route>
-        <Route path="/task04/:order">
-          <Shop products={sortedProducts(history.location.pathname)} />
+          <Shop products={sortedProducts} />
         </Route>
       </Switch>
     </>
@@ -40,4 +51,3 @@ const Task04 = () => {
 };
 
 export default Task04;
-
