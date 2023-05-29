@@ -7,31 +7,23 @@ import Shop from "../src/components/Shop";
 const Task04 = () => {
   const history = useHistory();
   const [sortedProducts, setSortedProducts] = useState(products);
-  const [currentOrder, setCurrentOrder] = useState("");
 
   const handleChange = (event) => {
     history.push(`/task04${event.target.value}`);
   };
 
   const orderOptions = {
-    "/task04/price-desc": (a, b) => b.price - a.price,
-    "/task04/price-asc": (a, b) => a.price - b.price,
+    "/task04/price-desc": [...products].sort((a, b) => b.price - a.price),
+    "/task04/price-asc": [...products].sort((a, b) => a.price - b.price),
   };
 
   useEffect(() => {
     const order = history.location.pathname;
-    setCurrentOrder(order);
+    setSortedProducts(() => {
+      if (orderOptions[order]) return orderOptions[order];
+      else return products;
+    });
   }, [history.location.pathname]);
-
-  useEffect(() => {
-    const sortFunction = orderOptions[currentOrder];
-    if (sortFunction) {
-      const sorted = products.slice().sort(sortFunction);
-      setSortedProducts(sorted);
-    } else {
-      setSortedProducts(products);
-    }
-  }, [currentOrder]);
 
   return (
     <>
