@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import products from "./../products.json";
-import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
+import { Redirect, Link } from "react-router-dom/cjs/react-router-dom.min";
 
 const Product = props => {
 	const { id } = useParams();
@@ -27,10 +27,12 @@ const Product = props => {
 	};
 
 	const getPropsProducts = () => {
-		const { name, description, price, category } = props;
+		const { id, name, description, price, category } = props;
 		return (
 			<article>
-				<h2>Name: {name}</h2>
+				<h2>
+					<Link to={`/task02/product-${id}`}>Name: {name}</Link>
+				</h2>
 				<p>Description: {description}</p>
 				<p>Category: {category}</p>
 				<p>Price: {price}</p>
