@@ -1,27 +1,44 @@
 import React from "react";
-import { useParams, Redirect } from "react-router-dom";
+import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import products from "./../products.json";
+import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 
-const Product = () => {
+const Product = props => {
 	const { id } = useParams();
-	console.log(products[0].id);
 
 	const [product = null] = products.filter(product => {
 		return product.id === parseInt(id);
 	});
 
-	if (product === null) {
-		return <Redirect to='/task02' />;
+	if (product === null && Object.keys(props).length === 0) {
+		return <Redirect to='/404.html' />;
 	}
 
-	return (
-		<article data-id={id}>
-			<h2>Name: {product.name}</h2>
-			<p>Description: {product.description}</p>
-			<p>Category: {product.category}</p>
-			<p>Price: {product.price}</p>
-		</article>
-	);
+	const getProducts = () => {
+		const { name, description, price, category } = product;
+		return (
+			<article data-id={id}>
+				<h2>Name: {name}</h2>
+				<p>Description: {description}</p>
+				<p>Category: {category}</p>
+				<p>Price: {price}</p>
+			</article>
+		);
+	};
+
+	const getPropsProducts = () => {
+		const { name, description, price, category } = props;
+		return (
+			<article>
+				<h2>Name: {name}</h2>
+				<p>Description: {description}</p>
+				<p>Category: {category}</p>
+				<p>Price: {price}</p>
+			</article>
+		);
+	};
+
+	return Object.keys(props).length === 0 ? getProducts() : getPropsProducts();
 };
 
 export default Product;
