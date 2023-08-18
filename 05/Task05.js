@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Route, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import products from "./../src/products.json";
 import ShopWithFilter from "../src/components/ShopWithFilter";
+import Shop from "../src/components/Shop";
 
 const Task05 = () => {
 	const initialState = {
@@ -61,8 +62,11 @@ const Task05 = () => {
 				</label>
 				<button type='submit'>search</button>
 			</form>
-			<Route path='/task05/:priceMin,:priceMax-:searchPhrase'>
+			<Route path='/task05/:priceMin?,:priceMax?-:searchPhrase?'>
 				<ShopWithFilter products={products} />
+			</Route>
+			<Route exact path='/task05'>
+				<Shop products={products} />
 			</Route>
 		</>
 	);
