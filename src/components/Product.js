@@ -1,42 +1,25 @@
 import React from 'react';
-import { Redirect, useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { Redirect, useParams, useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 
-const Product = () => {
-  const { id } = useParams()
-
-  const products = [
-    {
-      id: 1,
-      name: 'js course',
-      price: 200
-    },
-    {
-      id: 2,
-      name: 'css course',
-      price: 300
-    },
-    {
-      id: 3,
-      name: 'html course',
-      price: 400
-    }
-  ]
-
-  const [product = null] = products.filter(prod => {
-    return prod.id === Number(id)
-  })
+const Product = (product) => {
+  const { category = '/', id = null} = useParams()
+  const location = useLocation()
+  const baseUrl = location.pathname.replace(/\/[^/]+$/, '')
 
   if (product === null) {
-    return <Redirect to={'/task02'}/>
+    return <Redirect to={`${baseUrl}`}/>
   }
 
+  if (Number(id) === product.id || (category === '/' && id === null) || category === product.category.toLowerCase()) {
     return (
-      <>
+      <div>
       <p>product id: {product.id}</p>
       <p>product name: {product.name}</p>
       <p>product price: {product.price}</p>
-      </>
+      <p>product description: {product.description}</p>
+      </div>
     );
+  }
 }
 
 export default Product;
