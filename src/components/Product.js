@@ -1,18 +1,7 @@
 import React from 'react';
-import { useParams, Redirect } from 'react-router-dom';
-import products from './../products.json';
 
-const Product = () => {
-	const { id } = useParams();
-	const [product = null] = products.filter(
-		(item) => item.id === parseInt(id)
-	);
-
-	if (product === null) {
-		return <Redirect to='/404.html' />;
-	}
-
-	const { name, description, category, price } = product;
+const Product = (props) => {
+	const { name, description, category, price } = props;
 	return (
 		<article>
 			<h3>{name}</h3>
