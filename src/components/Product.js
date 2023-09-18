@@ -1,10 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 const Product = (props) => {
-	const { name, description, category, price } = props;
+	const { id, name, description, category, price } = props;
 	return (
 		<article>
-			<h3>{name}</h3>
+			<Link to={`/task02/product-${id}`}>
+				<h3>{name}</h3>
+			</Link>
 			<p>Opis: {description}</p>
 			<p>Cena: {price}zł</p>
 			<p>Kategoria: {category}</p>
