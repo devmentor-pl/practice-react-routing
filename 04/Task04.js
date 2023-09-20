@@ -6,9 +6,16 @@ import products from './../src/products.json';
 
 const Task04 = () => {
 	const history = useHistory();
-    
+
 	const handleSelect = (e) => {
-		history.push(e.target.value);
+		const sortValue = ['/task04', '/task04/price-asc', '/task04/price-desc'];
+		const value = e.target.value;
+
+		if (sortValue.includes(value)) {
+			history.push(value);
+		} else {
+			history.push('/404');
+		}
 	};
 
 	return (

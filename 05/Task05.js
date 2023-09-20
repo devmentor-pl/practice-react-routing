@@ -9,22 +9,31 @@ import products from './../src/products.json';
 import Shop from '../src/components/Shop';
 
 const FilteredProducts = () => {
-	const { minPrice, maxPrice, searchTerm } = useParams();
+	const { minPrice, maxPrice, searchTerm = '' } = useParams();
 
-	const minPriceOfProducts = products.filter((item) => item.price >= minPrice);
-	const maxPriceOfProducts = minPriceOfProducts.filter(
-		(item) => item.price <= maxPrice
-	);
+	const minPriceNumber = Number(minPrice);
+	const maxPriceNumber = Number(maxPrice);
 
-	const productsWithTerm = maxPriceOfProducts.filter((item) => {
-		const productName = item.name.toLowerCase();
-		const productDescription = item.description.toLowerCase();
+	const minPriceOfProducts = Number.isNaN(minPriceNumber)
+		? products
+		: products.filter((item) => item.price >= minPriceNumber);
 
-		return (
-			productName.includes(searchTerm) ||
-			productDescription.includes(searchTerm)
-		);
-	});
+	const maxPriceOfProducts = Number.isNaN(maxPriceNumber)
+		? minPriceOfProducts
+		: minPriceOfProducts.filter((item) => item.price <= maxPriceNumber);
+
+	const productsWithTerm =
+		searchTerm === ''
+			? maxPriceOfProducts
+			: maxPriceOfProducts.filter((item) => {
+					const productName = item.name.toLowerCase();
+					const productDescription = item.description.toLowerCase();
+
+					return (
+						productName.includes(searchTerm) ||
+						productDescription.includes(searchTerm)
+					);
+			  });
 
 	return <Shop products={productsWithTerm} />;
 };
@@ -62,7 +71,7 @@ const Task05 = () => {
 					<input
 						name='minPrice'
 						type='number'
-                        value={formData.minPrice}
+						value={formData.minPrice}
 						onChange={handleChange}
 					/>
 				</div>
@@ -71,7 +80,7 @@ const Task05 = () => {
 					<input
 						name='maxPrice'
 						type='number'
-                        value={formData.maxPrice}
+						value={formData.maxPrice}
 						onChange={handleChange}
 					/>
 				</div>
@@ -81,18 +90,13 @@ const Task05 = () => {
 						id='searchTerm'
 						name='searchTerm'
 						type='text'
-                        value={formData.searchTerm}
+						value={formData.searchTerm}
 						onChange={handleChange}
 					/>
 				</div>
 			</form>
 
-			<Route
-				exact
-				path='/task05/,-'>
-				<Shop products={products} />
-			</Route>
-			<Route path='/task05/:minPrice,:maxPrice-:searchTerm'>
+			<Route path='/task05/:minPrice?,:maxPrice?-:searchTerm?'>
 				<FilteredProducts />
 			</Route>
 		</>

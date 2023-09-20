@@ -3,6 +3,7 @@ import {
 	Route,
 	useParams,
 	Redirect,
+	Link,
 } from 'react-router-dom/cjs/react-router-dom.min';
 
 import Shop from '../src/components/Shop';
@@ -16,7 +17,7 @@ const CategoryPage = () => {
 	);
 
 	if (productsWithCategory.length === 0) {
-		return <Redirect to='/404.html' />;
+		return <Redirect to='/404' />;
 	}
 
 	return <Shop products={productsWithCategory} />;
@@ -26,6 +27,14 @@ const Task03 = () => {
 	return (
 		<>
 			<h1>Task03</h1>
+			<ul>
+				<li>
+					<Link to='/task03/javascript'>JavaScript</Link>
+				</li>
+				<li>
+					<Link to='/task03/react'>React</Link>
+				</li>
+			</ul>
 			<Route
 				exact
 				path='/task03'>
