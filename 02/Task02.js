@@ -1,26 +1,16 @@
 import React from 'react';
 import { Route, useParams, Link } from 'react-router-dom';
 import products from '../src/products.json';
+import Product from '../src/components/Product';
 
-const Product = () => {
+const ProductPage = () => {
 	const { id } = useParams();
 	const product = products.find((p) => p.id === Number(id));
 
 	if (!product) {
 		return <p>Product not found</p>;
 	}
-	return (
-		<div style={{ padding: '10px', lineHeight: '2', border: '2px solid blue' }}>
-			<h1 style={{ borderBottom: '2px solid #000', paddingBottom: '10px' }}>
-				Products
-			</h1>
-			<p>Product ID: {product.id}</p>
-			<p>{product.name}</p>
-			<p>{product.description}</p>
-			<p>{product.category}</p>
-			<p>{product.price}</p>
-		</div>
-	);
+	return <Product {...product} />;
 };
 const Task02 = () => {
 	return (
@@ -35,7 +25,7 @@ const Task02 = () => {
 			</ul>
 
 			<Route path="/task02/product-:id">
-				<Product />
+				<ProductPage />
 			</Route>
 		</>
 	);
