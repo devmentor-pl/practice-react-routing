@@ -1,7 +1,8 @@
 import React from 'react';
 import { Route, Link } from 'react-router-dom';
-import Shop from '../src/components/Shop';
+
 import products from './../src/products.json';
+import CategoryPage from '../src/components/CategoryPage';
 
 const Task03 = () => {
 	const uniqueCategories = [
@@ -19,10 +20,10 @@ const Task03 = () => {
 				</div>
 			))}
 			<Route exact path="/task03">
-				<Shop products={products} />
+				<CategoryPage products={products} />
 			</Route>
 			<Route path="/task03/:category">
-				<Shop products={products} />
+				<CategoryPage products={products} />
 			</Route>
 		</>
 	);
