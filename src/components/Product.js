@@ -4,10 +4,13 @@ const Product = ({ name, price, category, description }) => {
 	return (
 		<div
 			style={{
-				padding: '10px',
+				padding: '20px',
 				lineHeight: '2',
-				border: '2px solid blue',
-				backgroundColor: 'lightblue',
+				border: '2px solid lightblue',
+				maxWidth: '22rem',
+				margin: '2rem auto',
+				borderRadius: '5px',
+				boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
 			}}
 		>
 			<h1 style={{ borderBottom: '2px solid #000', paddingBottom: '10px' }}>
