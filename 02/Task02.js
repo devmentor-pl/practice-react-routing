@@ -1,16 +1,16 @@
 import React from 'react';
-import { HashRouter as Router, Route } from 'react-router-dom/cjs/react-router-dom';
-import Product from '../src/components/Product'
+import { Route } from 'react-router-dom';
+import Product02 from '../src/components/Product02'
 
 
 const Task02 = () => {
     return (
-        <Router>
+        <>
             <h1>Task02</h1>
             <Route path='/task02/product-:id'>
-                <Product />
+                <Product02 />
             </Route>
-        </Router>
+        </>
     );
 }
 

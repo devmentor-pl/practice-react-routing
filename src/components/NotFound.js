@@ -1,9 +1,16 @@
-import React from "react";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const NotFound = () => {
+    
     return (
-        <p>This page does not exist!</p>
-    )
+        <>
+            <p>
+                Podana strona nie istnieje! Wróć 
+                do <Link to="/">strony głównej</Link>.
+            </p>
+        </>
+    );
 }
 
-export default NotFound
+export default NotFound;

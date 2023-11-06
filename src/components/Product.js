@@ -1,18 +1,6 @@
 import React from "react";
-import products from '../products.json'
-import { useParams } from "react-router-dom/cjs/react-router-dom";
 
-const Product = () => {
-    const { id } = useParams()
-
-    const [currentProduct = null] = products.filter(item => item.id === Number(id))
-
-    if (currentProduct === null) {
-        console.log('This product does not exist')
-        return
-    }
-
-    const { name, category, description, price } = currentProduct
+const Product = ({ name, category, description, price }) => {
 
     return (
         <section>
