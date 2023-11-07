@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Select from '../src/components/Select';
-import { Route, Redirect } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import products from '../src/products.json'
 import Shop from '../src/components/Shop'
 

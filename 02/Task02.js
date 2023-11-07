@@ -2,7 +2,6 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import Product02 from '../src/components/Product02'
 
-
 const Task02 = () => {
     return (
         <>
