@@ -14,14 +14,22 @@ const GlobalStyles = createGlobalStyle`
     color: #ededed;
   }
 
-  ul {
-    list-style: none;
-  }
-
   h1 {
     text-transform: uppercase;
     font-size: 3rem;
     font-weight: 800;
+  }
+
+  h1, h2 {
+    padding-bottom: 0.75rem;
+  }
+
+  p {
+    font-weight: 600;
+  }
+
+  ul {
+    list-style: none;
   }
 `;
 

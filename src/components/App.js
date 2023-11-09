@@ -7,6 +7,8 @@ import Task03 from './../../03/Task03';
 import Task04 from './../../04/Task04';
 import Task05 from './../../05/Task05';
 import GlobalStyles from '../../styled/Global';
+import NotFound from '../views/NotFound';
+import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 
 const App = () => {
     const routes = [
@@ -35,6 +37,12 @@ const App = () => {
                     <Route path='/task03' component={Task03} />
                     <Route path='/task04' component={Task04} />
                     <Route path='/task05' component={Task05} />
+                    <Route path='/404.html'>
+                        <NotFound />
+                    </Route>
+                    <Route>
+                        <Redirect to='/404.html' />
+                    </Route>
                 </Switch>
             </Router>
         </>
