@@ -17,16 +17,17 @@ function Product(props) {
         return <Redirect to='/404.html' />;
     }
 
-    const { name, description, id: itemId } = item;
+    const { name, description, id: itemId, price } = item;
 
     return (
         <div className='card' data-id={id || itemId}>
             <h2>{name}</h2>
             <p>{description}</p>
+            <p style={{ fontWeight: '500', marginTop: '2rem' }}>price: {price}</p>
         </div>
     );
 }
 
 export default Product;
 
-// wiem, burdel :) 
+// wiem, burdel :)
