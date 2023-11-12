@@ -23,7 +23,7 @@ const GlobalStyles = createGlobalStyle`
   h1, h2 {
     padding: 0.75rem 0;
     border-color: #292929;
-    line-height: 0.75em;
+    line-height: 0.9em;
   }
 
   p {
