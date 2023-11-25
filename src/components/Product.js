@@ -6,7 +6,7 @@ const Product = ({ id, name, description, category, price }) => {
 		<>
 			<ul>
 				<li>
-					<Link to={`/task02/product-${id}`}>{name}</Link>
+					<Link to={`/task02/product-${id}`}>{name}</Link> <span>{price} zł</span>
 				</li>
 			</ul>
 		</>
