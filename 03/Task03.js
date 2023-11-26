@@ -37,7 +37,7 @@ const Task03 = () => {
 	return (
 		<>
 			<h1>Task03</h1>
-			Categories:
+			Kategorie:
 			{nav}
 			{routes}
 		</>
