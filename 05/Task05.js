@@ -1,28 +1,48 @@
-import React, { useState } from 'react';
-import { Route, Link, useHistory } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Route, useHistory, useLocation } from 'react-router-dom';
 import Shop from '../src/components/Shop';
 import products from '../src/products.json';
 
 const Task05 = () => {
+	const history = useHistory();
+	const location = useLocation();
+
 	const [minValue, setMinValue] = useState('');
 	const [maxValue, setMaxValue] = useState('');
 	const [searchPhrase, setSearchPhrase] = useState('');
-	const [link, setLink] = useState('/task05');
-	const [filteredProducts, setFilteredProducts] = useState(products);
-	const history = useHistory();
+	const [filteredProducts, setFilteredProducts] = useState([]);
 
-	const filterValue = products.filter((p) => p.price > minValue && p.price < maxValue);
-	const filterPhrase = filterValue.filter((p) => p.name.includes(searchPhrase));
+	useEffect(() => {
+		const params = new URLSearchParams(location.search);
+
+		setMinValue(params.get('minValue') || '');
+		setMaxValue(params.get('maxValue') || '');
+		setSearchPhrase(params.get('searchPhrase') || '');
+
+		const filterValue = products.filter(
+			(p) =>
+				(!params.get('minValue') || p.price > Number(params.get('minValue'))) &&
+				(!params.get('maxValue') || p.price < Number(params.get('maxValue'))) &&
+				(!params.get('searchPhrase') ||
+					p.name.toLowerCase().includes(params.get('searchPhrase').toLowerCase()) ||
+					p.description.toLowerCase().includes(params.get('searchPhrase').toLowerCase()))
+		);
+
+		setFilteredProducts(filterValue);
+	}, [location.search]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
-		setLink(`/task05/[${minValue}],[${maxValue}]-[${searchPhrase}]`);
-        changeArray
-	};
-	const changeArray = () => {
-		setFilteredProducts(filterPhrase);
-		history.push(link);
+		const params = new URLSearchParams();
+		if (minValue) params.set('minValue', minValue);
+		if (maxValue) params.set('maxValue', maxValue);
+		if (searchPhrase) params.set('searchPhrase', searchPhrase);
+
+		const searchString = params.toString();
+		const newLink = `/task05${searchString ? `?${searchString}` : ''}`;
+
+		history.push(newLink);
 	};
 
 	return (
@@ -30,21 +50,21 @@ const Task05 = () => {
 			<h1>Task05</h1>
 			<form onSubmit={handleSubmit}>
 				<div>
-					<p>podaj przedział cenowy</p>
+					<p>Podaj przedział cenowy</p>
 					<input
 						type='text'
 						value={minValue}
-						onChange={(e) => setMinValue(Number(e.target.value))}
+						onChange={(e) => setMinValue(e.target.value)}
 					/>
 					<span>-</span>
 					<input
 						type='text'
 						value={maxValue}
-						onChange={(e) => setMaxValue(Number(e.target.value))}
+						onChange={(e) => setMaxValue(e.target.value)}
 					/>
 				</div>
 				<div>
-					<label htmlFor=''>znajdz produkt</label>
+					<label htmlFor=''>Znajdź produkt</label>
 					<input
 						type='text'
 						value={searchPhrase}
@@ -53,11 +73,11 @@ const Task05 = () => {
 				</div>
 				<input
 					type='submit'
-					value='submit'
+					value='Szukaj'
 				/>
 			</form>
 
-			<Route path={link}>
+			<Route path='/task05'>
 				<Shop products={filteredProducts} />
 			</Route>
 		</>
