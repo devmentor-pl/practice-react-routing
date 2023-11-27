@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams, Redirect } from 'react-router-dom';
-import Product from './Product'; // Importuj komponent Product
+import Product from './Product'; 
 import products from '../products.json';
 
 const ProductRouter = () => {
