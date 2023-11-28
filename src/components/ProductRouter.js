@@ -3,7 +3,7 @@ import { useParams, Redirect } from 'react-router-dom';
 import Product from './Product'; 
 import products from '../products.json';
 
-const ProductRouter = () => {
+const ProductRouter = ({ version }) => {
 	const { id } = useParams();
 
 	const [product = null] = products.filter((prod) => prod.id === parseInt(id));
@@ -14,7 +14,6 @@ const ProductRouter = () => {
 
 	const { name, description, category, price } = product;
 
-	
 	return (
 		<Product
 			id={id}
@@ -22,6 +21,7 @@ const ProductRouter = () => {
 			description={description}
 			category={category}
 			price={price}
+			version={version}
 		/>
 	);
 };

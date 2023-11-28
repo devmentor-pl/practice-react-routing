@@ -1,8 +1,7 @@
 import React from 'react';
 import { HashRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
-import Product02 from '../src/components/Product02';
-
+import ProductRouter from '../src/components/ProductRouter';
 const Task02 = () => {
 	const links = [
 		{ url: '/task02/product-1', text: 'product-1' },
@@ -25,8 +24,8 @@ const Task02 = () => {
 				})}
 			</ul>
 			<Switch>
-				<Route path='/task02/:product-:id'>
-					<Product02 />
+				<Route path='/task02/product-:id'>
+					<ProductRouter version='full' />
 				</Route>
 			</Switch>
 		</Router>
