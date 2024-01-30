@@ -1,12 +1,9 @@
 import React from 'react';
 import Product from './Product';
 
-const Shop = ({products}) => {
-    return (
-        <section>
-            { products.map(p => <Product {...p} />)}
-        </section>
-    );
-}
+const Shop = ({ products }) => {
+	console.log('shop', products);
+	return products.map((p) => <Product key={p.id} {...p} />);
+};
 
 export default Shop;
