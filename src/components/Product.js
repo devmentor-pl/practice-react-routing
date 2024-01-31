@@ -1,22 +1,18 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
-import products from '../products.json';
+import { Link, useLocation } from 'react-router-dom';
 
-const Product = () => {
-  const { id } = useParams();
-  const [product = null] = products.filter(
-    (item) => item.id === parseInt(id, 10)
-  );
+const Product = (props) => {
+  const { id, name, description, category, price } = props;
+  const location = useLocation();
 
-  if (!product) {
-    return <div>Product not found.</div>;
-  }
-
-  const { name, description, category, price } = product;
+  const isTask03 = location.pathname.startsWith('/task03');
 
   return (
     <div>
       <h2>{name}</h2>
+      {isTask03 && (
+        <Link to={`/task02/product-${id}`}>View Product Details</Link>
+      )}
       <p>Category: {category}</p>
       <p>Price: {price}</p>
       <p>Description: {description}</p>

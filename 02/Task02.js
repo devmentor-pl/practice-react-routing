@@ -1,6 +1,7 @@
 import React from 'react';
-import { Route, Switch, Link } from 'react-router-dom';
+import { Route, Switch, Link, useParams } from 'react-router-dom';
 import Product from '../src/components/Product';
+import products from '../src/products.json';
 
 const Task02 = () => {
   return (
@@ -23,12 +24,18 @@ const Task02 = () => {
         </ul>
       </nav>
       <Switch>
-        <Route path="/task02/product-:id">
-          <Product />
-        </Route>
+        <Route path="/task02/product-:id" component={ProductWithId} />
       </Switch>
     </>
   );
+};
+
+const ProductWithId = () => {
+  let { id } = useParams();
+  id = parseInt(id, 10);
+  const product = products.find((p) => p.id === id);
+
+  return product ? <Product {...product} /> : <p>Product not found</p>;
 };
 
 export default Task02;
