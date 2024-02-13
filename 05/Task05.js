@@ -3,6 +3,7 @@ import { useLocation, useHistory } from 'react-router-dom';
 import products from '../src/products.json';
 import ProductFilterForm from '../src/components/ProductFilterForm';
 import Shop from '../src/components/Shop';
+import { isMatch } from '../src/utilis/searchUtilis';
 
 const Task05 = () => {
   const history = useHistory();
@@ -11,19 +12,16 @@ const Task05 = () => {
 
   useEffect(() => {
     const params = new URLSearchParams(location.hash.split('?')[1]);
-    const minPrice = params.get('minPrice');
-    const maxPrice = params.get('maxPrice');
-    const searchTerm = params.get('searchTerm');
+    const paramsObject = Object.fromEntries(params);
 
-    const result = products.filter((product) => {
-      return (
+    const { minPrice, maxPrice, searchTerm } = paramsObject;
+
+    const result = products.filter(
+      (product) =>
         (!minPrice || product.price >= minPrice) &&
         (!maxPrice || product.price <= maxPrice) &&
-        (!searchTerm ||
-          product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          product.description.toLowerCase().includes(searchTerm.toLowerCase()))
-      );
-    });
+        isMatch(product, searchTerm)
+    );
 
     setFilteredProducts(result);
   }, [location.hash]);
