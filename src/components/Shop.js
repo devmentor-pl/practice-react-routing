@@ -4,7 +4,9 @@ import Product from './Product';
 const Shop = ({products}) => {
     return (
         <section>
-            { products.map(p => <Product {...p} />)}
+            {products.map(product => (
+                <Product key={product.id} {...product} />
+            ))}
         </section>
     );
 }
