@@ -1,37 +1,29 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
+import React from "react";
+import products from "../products.json";
+import { Redirect, useParams, Link } from "react-router-dom";
 
-const Product = ({id: propId, name, description, category, price}) => {
-    const { id: paramId } = useParams();
-    const id = paramId || propId;
-
-    let product;
-    if (!propId) {
-        const products = [
-            {"id": 1, "name": "Elegant Watch", "description": "Klasyczny zegarek z mechanizmem kwarcowym i skórzanym paskiem.", "category": "Accessories", "price": 250},
-            {"id": 2, "name": "Leather Wallet", "description": "Portfel wykonany z wysokiej jakości skóry, z licznymi przegródkami.", "category": "Accessories", "price": 85},
-            {"id": 3, "name": "Sports Sneakers", "description": "Wygodne i stylowe obuwie sportowe, idealne na co dzień.", "category": "Footwear", "price": 199},
-            {"id": 4, "name": "Smartphone Holder", "description": "Uniwersalny uchwyt do smartfona, z możliwością regulacji.", "category": "Electronics", "price": 29}
-        ];
-        product = products.find(product => product.id === parseInt(id, 10));
-    } else {
-        product = {id, name, description, category, price};
-    }
-
-    if (!product) {
-        return <p>Towar o podanym ID nie został znaleziony.</p>;
-    }
-
+const Product = ({ name, description, price, link = null }) => {
+    const productTitle = link ? <Link to={link}>{name}</Link> : name;
+  
     return (
-        <div>
-            <h2>Product Details</h2>
-            <p>ID towaru: {product.id}</p>
-            <p>Nazwa: {product.name}</p>
-            <p>Opis: {product.description}</p>
-            <p>Kategoria: {product.category}</p>
-            <p>Cena: {product.price} zł</p>
-        </div>
+      <article>
+        <h3>{productTitle}</h3>
+        <p>Price: {price} zł</p>
+        <p>{description}</p>
+      </article>
     );
-}
+};
 
-export default Product;
+
+const ProductPage = () => {
+    const { id } = useParams();
+    const product = products.find((product, index) => index.toString() === id);
+  
+    if (!product) {
+      return <Redirect to="/404" />;
+    }
+  
+    return <Product {...product} />;
+};
+
+export { Product, ProductPage };
