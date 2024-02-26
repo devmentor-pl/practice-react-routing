@@ -1,12 +1,20 @@
-import React from 'react';
+import React from 'react'
 
-import products from './../src/products.json';
+import Shop from '../src/components/Shop'
+import { Switch, Route } from 'react-router-dom'
 
 const Task03 = () => {
-    return (
-        <h1>Task03</h1>
-    );
+	return (
+		<>
+			<h1>Task03</h1>
+			<Route path="/task03/">
+				<Shop />
+			</Route>
+			{/* <Route path="/task03/:alias">
+				<Shop />
+			</Route> */}
+		</>
+	)
 }
 
-export default Task03;
-
+export default Task03
