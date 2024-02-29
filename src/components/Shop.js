@@ -1,15 +1,21 @@
-import React from 'react';
-import Product from './Product';
+import React, { useEffect } from 'react'
+import Product from './Product'
+import { Redirect } from 'react-router-dom'
+import StyledSection from './styled/Section.styled'
 
 const Shop = ({ products }) => {
-	console.log(products)
+
+	// if (products.length === 0) {
+	// 	return <Redirect to="/404.html" />
+	// }
+
 	return (
-		<section>
+		<StyledSection>
 			{products.map(prod => (
 				<Product key={prod.id} {...prod} />
 			))}
-		</section>
+		</StyledSection>
 	)
 }
 
-export default Shop;
+export default Shop

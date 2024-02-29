@@ -24,8 +24,11 @@
     "webpack-dev-server": "^4.11.1"
   },
   "dependencies": {
+    "@syncfusion/ej2-react-inputs": "^24.2.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^5.3.4"
+    "react-router-dom": "^5.3.4",
+    "react-slider": "^2.0.6",
+    "styled-components": "^6.1.8"
   }
 }
