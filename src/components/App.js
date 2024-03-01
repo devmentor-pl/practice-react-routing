@@ -30,7 +30,7 @@ const App = () => {
                 <Route path='/task03' component={Task03}/>
                 <Route path='/task04' component={Task04}/>
                 <Route path='/task05' component={Task05}/>
-                <Route><NotFound/></Route>
+                {/* <Route><NotFound/></Route> */}
             </Switch>
         </Router>
     )
