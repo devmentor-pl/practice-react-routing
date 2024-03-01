@@ -19,8 +19,8 @@ const Task01 = () => {
             </ul>
         </nav>
         <Switch>
-            <Route exact path='/task01/home' component={ Home }/>
-            <Route exact path='/task01/contact' component={ Contact }/>
+            <Route path='/task01/home' component={ Home }/>
+            <Route path='/task01/contact' component={ Contact }/>
         </Switch>
         </div>
         </Router>
