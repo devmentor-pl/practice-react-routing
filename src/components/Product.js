@@ -2,7 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import products from '../products.json';
 
-const Product = ({name, description}) => {
+const Product = ( {name, description, price } ) => {
   // const { id } = useParams();
   // const [product = null] = products.filter((prd) => prd.id === parseInt(id));
   // if (product === null) {
@@ -20,6 +20,7 @@ const Product = ({name, description}) => {
     <article>
       <h1>{name}</h1>
       <p>{description}</p>
+      <p>{price}: price</p>
     </article>
   )
   
