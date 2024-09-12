@@ -2,7 +2,7 @@
 
 &nbsp;
 
-# `#01` React: Ścieżkowanie
+# `#01` React: Ścieżkowanie.
 
 
 Twoim zadaniem jest przygotować Routing tak, aby pod poniższymi adresami pojawiły się konkretne komponenty z katalogu `./src/components`. Pamiętaj, że Twoja implementacja ma być wdrożona w pliku `Task01.js`.
