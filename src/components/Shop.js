@@ -1,12 +1,14 @@
 import React from 'react';
-import Product from './Product';
+import RenderProduct from "./RenderPRoducts";
 
-const Shop = ({products}) => {
-    return (
-        <section>
-            { products.map(p => <Product {...p} />)}
-        </section>
-    );
-}
+const Shop = ({ products }) => {
+  return (
+    <section>
+      {products.map((p) => (
+        <RenderProduct key={p.id} {...p} />
+      ))}
+    </section>
+  );
+};
 
 export default Shop;
