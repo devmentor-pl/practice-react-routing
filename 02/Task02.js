@@ -1,10 +1,13 @@
-import React from 'react';
+import React from "react";
+import { Switch, Route } from "react-router-dom";
+import Product from "../src/components/Product";
 
 const Task02 = () => {
-    return (
-        <h1>Task02</h1>
-    );
-}
+  return (
+    <Switch>
+      <Route exact path="/task02/product-:id" component={Product} />
+    </Switch>
+  );
+};
 
 export default Task02;
-
