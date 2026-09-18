@@ -1,8 +1,19 @@
 import React from 'react';
+import {
+    HashRouter as Router,
+    Route
+} from 'react-router-dom'
+
+import Home from '../src/components/Home';
+import Contact from '../src/components/Contact'
 
 const Task01 = () => {
     return (
-        <h1>Task01</h1>
+        <Router basename='/task01'>
+            <section><h1>Task01</h1></section>
+            <Route path='/home' component={Home} />
+            <Route path='/contact' component={Contact} />
+        </Router>
     );
 }
 
